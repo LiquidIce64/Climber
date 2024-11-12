@@ -578,6 +578,8 @@ GameObject:
   - component: {fileID: 1520692278}
   - component: {fileID: 1520692277}
   - component: {fileID: 1520692276}
+  - component: {fileID: 1520692282}
+  - component: {fileID: 1520692281}
   - component: {fileID: 1520692275}
   - component: {fileID: 1520692280}
   - component: {fileID: 1520692274}
@@ -632,8 +634,6 @@ MonoBehaviour:
   jumpStrength: 4
   groundCheck: {fileID: 1290175887}
   groundCheckRadius: 0.505
-  isGrounded: 0
-  rig: {fileID: 1520692274}
 --- !u!136 &1520692276
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -743,6 +743,30 @@ MonoBehaviour:
   vertSens: 1
   horizSens: 2
   cam: {fileID: 330585543}
+--- !u!114 &1520692281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520692273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445045d56513e2d47b11f3453ae8c1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1520692282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520692273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047c7a6fed3d4824391a757d6ffc3400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1768918824
 GameObject:
   m_ObjectHideFlags: 0

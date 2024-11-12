@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
@@ -7,24 +8,21 @@ public class Movement : MonoBehaviour
     [SerializeField] private float jumpStrength;
     [SerializeField] private GameObject groundCheck;
     [SerializeField] private float groundCheckRadius;
-    [SerializeField] private bool isGrounded;
-    [SerializeField] private Rigidbody rig;
+    private bool isGrounded;
+    private Rigidbody rig;
+
+    private void Awake()
+    {
+        rig = GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate()
     {
-        checkForGround();
-        Move();
-        if (isGrounded && Input.GetAxis("Jump") > .1f)
-        {
-            Jump();
-        }
+        CheckForGround();
     }
-
-    private void Move()
+    
+    public void Move(float horizontal, float vertical)
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
         Vector3 direction = Vector3.ClampMagnitude(transform.forward * vertical + transform.right * horizontal, 1) * speed * Time.fixedDeltaTime;
         if (isGrounded)
         {
@@ -36,12 +34,15 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
-        rig.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
+        if (isGrounded)
+        {
+            rig.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
+        }
     }
 
-    private bool checkForGround()
+    private bool CheckForGround()
     {
         isGrounded = Physics.OverlapSphere(groundCheck.transform.position, groundCheckRadius, LayerMask.GetMask("Ground")).Length > 0;
         return isGrounded;

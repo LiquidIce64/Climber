@@ -6,8 +6,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float strafeSpeed;
     [SerializeField] private float jumpStrength;
-    [SerializeField] private GameObject groundCheck;
     [SerializeField] private float groundCheckRadius;
+    [SerializeField] private float groundCheckDistance;
     private bool isGrounded;
     private Rigidbody rig;
 
@@ -44,7 +44,11 @@ public class Movement : MonoBehaviour
 
     private bool CheckForGround()
     {
-        isGrounded = Physics.OverlapSphere(groundCheck.transform.position, groundCheckRadius, LayerMask.GetMask("Ground")).Length > 0;
+        if (Physics.SphereCast(transform.position, groundCheckRadius, Vector3.down, out RaycastHit hit, groundCheckDistance))
+        {
+            isGrounded = Vector3.Angle(hit.normal, Vector3.up) < 50;
+        }
+        else { isGrounded = false; }
         return isGrounded;
     }
 }

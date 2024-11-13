@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float strafeSpeed;
     [SerializeField] private float jumpStrength;
+    [SerializeField] private float climbVelocity;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private float groundCheckDistance;
     private bool isGrounded;
@@ -40,6 +42,11 @@ public class Movement : MonoBehaviour
         {
             rig.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
         }
+    }
+
+    public void Climb()
+    {
+        rig.linearVelocity = new Vector3(rig.linearVelocity.x, climbVelocity, rig.linearVelocity.z);
     }
 
     private bool CheckForGround()

@@ -70,9 +70,11 @@ namespace Movement
 
         private bool CheckForGround()
         {
+            var traceOrigin = player.moveData.origin;
+            traceOrigin.y += 0.01f;
             var traceDestination = player.moveData.origin;
-            traceDestination.y -= config.groundCheckDistance;
-            var trace = PhysicsUtil.TraceCollider(player.collider, player.moveData.origin, traceDestination, MovementPhysics.groundLayerMask);
+            traceDestination.y -= config.groundCheckDistance + 0.01f;
+            var trace = PhysicsUtil.TraceCollider(player.collider, traceOrigin, traceDestination, MovementPhysics.groundLayerMask);
             float groundSlope = Vector3.Angle(Vector3.up, trace.planeNormal);
 
             var movingUp = player.moveData.velocity.y > 0f;
@@ -133,7 +135,7 @@ namespace Movement
             {   // Jump
                 if (!config.autoBhop) player.moveData.desiredJump = false;
 
-                player.moveData.velocity.y += config.jumpForce;
+                player.moveData.velocity.y = config.jumpVelocity;
                 jumping = true;
             }
             else
@@ -169,8 +171,8 @@ namespace Movement
                     Quaternion.AngleAxis(-90, Vector3.up) * player.moveData.velocity
                 ).normalized;
 
-                // If going down the slope, press more against it to keep yourself grounded
-                if (velocityDirection.y < 0f) velocityDirection.y *= 1.2f;
+                // Modify y velocity to prevent bugs caused by colliding with slopes or losing ground
+                velocityDirection.y *= velocityDirection.y < 0f ? 1.2f : 1.0f;
 
                 // Set vertical velocity to follow ground slope
                 player.moveData.velocity.y = velocityDirection.y * player.moveData.velocity.magnitude;

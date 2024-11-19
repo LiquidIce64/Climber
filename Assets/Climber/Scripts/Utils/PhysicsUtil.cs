@@ -17,7 +17,7 @@ public static class PhysicsUtil
 
     public static void GetCapsulePoints(CapsuleCollider capc, Vector3 origin, out Vector3 p1, out Vector3 p2)
     {
-        var distanceToPoints = capc.height / 2f - capc.radius;
+        var distanceToPoints = capc.height / 2f;
         p1 = origin + capc.center + Vector3.up * distanceToPoints;
         p2 = origin + capc.center - Vector3.up * distanceToPoints;
     }

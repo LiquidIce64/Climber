@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Movement
 {
@@ -52,7 +50,7 @@ namespace Movement
         public MovementConfig moveConfig { get { return movementConfig; } }
         public MoveData moveData { get { return _moveData; } }
         public new Collider collider { get { return _collider; } }
-
+        
         public GameObject groundObject
         {
             get { return _groundObject; }
@@ -95,8 +93,8 @@ namespace Movement
         private void Start()
         {
             // Add a collider object
-            _colliderObject = new GameObject("PlayerCollider");
-            _colliderObject.layer = gameObject.layer;
+            _colliderObject = new GameObject("PlayerCollider")
+                { layer = gameObject.layer };
             _colliderObject.transform.SetParent(transform);
             _colliderObject.transform.rotation = Quaternion.identity;
             _colliderObject.transform.localPosition = Vector3.zero;
@@ -116,7 +114,7 @@ namespace Movement
 
             // Add a collider (destroy and replace it if one already exists)
             _collider = gameObject.GetComponent<Collider>();
-            if (_collider != null) GameObject.Destroy(_collider);
+            if (_collider != null) Destroy(_collider);
             switch (collisionType)
             {
                 case ColliderType.Box:

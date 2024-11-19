@@ -10,7 +10,7 @@ namespace Movement
         [Header("Jumping and gravity")]
         public bool autoBhop = true;
         public float gravity = 20f;
-        public float jumpForce = 6.5f;
+        public float jumpVelocity = 6.5f;
         public float climbVelocity = 10f;
 
         [Header("General physics")]

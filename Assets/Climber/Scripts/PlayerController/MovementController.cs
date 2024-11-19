@@ -147,12 +147,8 @@ namespace Movement
                     true
                 );
 
-                // Get movement directions relative to ground slope
-                Vector3 forward = Vector3.Cross(groundNormal, -playerTransform.right);
-                Vector3 right = Vector3.Cross(groundNormal, forward);
-
                 Vector3 moveVector = Vector3.ClampMagnitude(
-                    player.moveData.verticalAxis * forward + player.moveData.horizontalAxis * right, 1f);
+                    player.moveData.verticalAxis * playerTransform.forward + player.moveData.horizontalAxis * playerTransform.right, 1f);
 
                 if (moveVector.magnitude > 0f)
                     player.moveData.velocity += MovementPhysics.Accelerate(
@@ -172,6 +168,9 @@ namespace Movement
                     groundNormal,
                     Quaternion.AngleAxis(-90, Vector3.up) * player.moveData.velocity
                 ).normalized;
+
+                // If going down the slope, press more against it to keep yourself grounded
+                if (velocityDirection.y < 0f) velocityDirection.y *= 1.2f;
 
                 // Set vertical velocity to follow ground slope
                 player.moveData.velocity.y = velocityDirection.y * player.moveData.velocity.magnitude;

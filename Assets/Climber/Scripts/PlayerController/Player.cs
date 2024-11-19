@@ -68,8 +68,13 @@ namespace Movement
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            if (_groundObject == null)
+                Gizmos.color = Color.red;
+            else
+                Gizmos.color = Color.green;
             Gizmos.DrawWireCube(transform.position, colliderSize);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, transform.position + _moveData.velocity * 0.25f);
         }
 
 

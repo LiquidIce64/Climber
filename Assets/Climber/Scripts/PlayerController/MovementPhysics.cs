@@ -54,7 +54,6 @@ namespace Movement
                     direction.Normalize();
                     Vector3 penetrationVector = direction * distance;
                     Vector3 velocityProjected = Vector3.Project(velocity, -direction);
-                    velocityProjected.y = 0; // don't touch y velocity, we need it to calculate fall damage elsewhere
                     origin += penetrationVector;
                     velocity -= velocityProjected * velocityMultiplier;
 
@@ -178,7 +177,7 @@ namespace Movement
                     }
                 }
             }
-
+            
             if (totalFraction == 0f) velocity = Vector3.zero; // Couldn't move
 
             return;

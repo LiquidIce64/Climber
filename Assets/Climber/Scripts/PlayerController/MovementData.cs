@@ -19,6 +19,5 @@ namespace Movement
         public bool desiredClimb = false;
 
         public float rigidbodyPushForce = 1f;
-        public bool grounded = false;
     }
 }

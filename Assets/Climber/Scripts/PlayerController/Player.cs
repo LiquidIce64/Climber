@@ -25,15 +25,13 @@ namespace Movement
         public MovementConfig movementConfig;
         public InputConfig inputConfig;
 
-        [HideInInspector] public Transform viewTransform;
-
         private GameObject _groundObject;
         private Vector3 _baseVelocity;
         private Collider _collider;
         private GameObject _colliderObject;
 
         private MoveData _moveData = new();
-        private MovementController controller = new();
+        private MovementController controller;
 
         private Rigidbody rb;
 
@@ -59,9 +57,9 @@ namespace Movement
 
         public Vector3 baseVelocity { get { return _baseVelocity; } }
 
-        public Vector3 forward { get { return viewTransform.forward; } }
-        public Vector3 right { get { return viewTransform.right; } }
-        public Vector3 up { get { return viewTransform.up; } }
+        public Vector3 forward { get { return _moveData.viewTransform.forward; } }
+        public Vector3 right { get { return _moveData.viewTransform.right; } }
+        public Vector3 up { get { return _moveData.viewTransform.up; } }
 
 
         private void OnDrawGizmos()
@@ -78,7 +76,8 @@ namespace Movement
 
         private void Awake()
         {
-            controller.playerTransform = transform;
+            controller = new(this, movementConfig)
+                { playerTransform = transform };
 
             // Hide cursor
             Cursor.lockState = CursorLockMode.Locked;
@@ -139,18 +138,18 @@ namespace Movement
             _moveData.origin = transform.position;
 
             _camera = Camera.main;
-            viewTransform = _camera.transform;
+            _moveData.viewTransform = _camera.transform;
 
             _collider.isTrigger = !solidCollider;
         }
 
         private void Update()
         {
-            _colliderObject.transform.rotation = Quaternion.identity;
-
             GetInputs();
 
-            moveData.origin = transform.position;
+            _colliderObject.transform.rotation = Quaternion.identity;
+            transform.position = _moveData.origin;
+            _moveData.playerTransform = transform;
 
             // Handle triggers
             if (numberOfTriggers != triggers.Count)
@@ -161,14 +160,12 @@ namespace Movement
                     if (trigger == null) continue;
 
                     // Put trigger handling here
-                    
+
                 }
                 numberOfTriggers = triggers.Count;
             }
 
-            controller.ProcessMovement(this, movementConfig, Time.deltaTime);
-
-            transform.position = moveData.origin;
+            controller.ProcessMovement(Time.deltaTime);
         }
 
         private void GetInputs()
@@ -205,10 +202,7 @@ namespace Movement
             transform.Rotate(transform.up, mouseX);
             cameraAngle = Mathf.Clamp(cameraAngle + mouseY, -maxCameraAngle, maxCameraAngle);
             _camera.transform.localRotation = Quaternion.AngleAxis(cameraAngle, Vector3.left);
-            viewTransform = _camera.transform;
-
-            _moveData.playerTransform = transform;
-            _moveData.viewTransform = viewTransform;
+            _moveData.viewTransform = _camera.transform;
         }
 
         private void OnTriggerEnter(Collider other)

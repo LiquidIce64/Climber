@@ -64,18 +64,9 @@ namespace Movement
             }
         }
 
-        public static Vector3 Friction(Vector3 velocity, float frictionMultiplier, float deltaTime, float minDeceleration = 0.1f, bool useHorizVel = false)
+        public static Vector3 Friction(Vector3 velocity, float frictionMultiplier, float deltaTime, float minDeceleration = 0.1f)
         {
-            float speed;
-            if (useHorizVel)
-            {
-                // Get horizontal speed
-                float yVel = velocity.y;
-                velocity.y = 0f;
-                speed = velocity.magnitude;
-                velocity.y = yVel;
-            }
-            else speed = velocity.magnitude;
+            float speed = velocity.magnitude;
 
             // No friction when not moving
             if (speed <= 0f) return Vector3.zero;

@@ -21,7 +21,7 @@ namespace Movement
         [Header("Air movement")]
         public float strafeSpeed = 0.4f;
         public float airAcceleration = 12f;
-        public float overbounce = 1.001f;
+        public float overbounce = 1.0f;
 
         [Header("Ground movement")]
         public float walkSpeed = 7f;

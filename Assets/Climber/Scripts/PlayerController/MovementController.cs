@@ -7,22 +7,19 @@ namespace Movement
         [HideInInspector] public Transform playerTransform;
         private IMovementControllable player;
         private MovementConfig config;
-        private float deltaTime;
 
         public bool jumping = false;
 
         Vector3 groundNormal = Vector3.up;
 
-        public void ProcessMovement(IMovementControllable player, MovementConfig config, float deltaTime)
+        public MovementController(IMovementControllable player, MovementConfig config)
         {
-            // Cache parameters to use in other functions
             this.player = player;
             this.config = config;
-            this.deltaTime = deltaTime;
+        }
 
-            if (player.moveData.velocity.y <= 0f)
-                jumping = false;
-            
+        public void ProcessMovement(float deltaTime)
+        {
             // Apply gravity
             if (player.groundObject == null)
             {
@@ -32,7 +29,7 @@ namespace Movement
 
 
             CheckForGround();
-            CalculateMovementVelocity();
+            CalculateMovementVelocity(deltaTime);
 
 
             // Clamp horizontal velocity
@@ -76,25 +73,23 @@ namespace Movement
             traceDestination.y -= config.groundCheckDistance + 0.01f;
             var trace = PhysicsUtil.TraceCollider(player.collider, traceOrigin, traceDestination, MovementPhysics.groundLayerMask);
             float groundSlope = Vector3.Angle(Vector3.up, trace.planeNormal);
+            float velAwayFromGround = Vector3.Dot(player.moveData.velocity, trace.planeNormal);
 
-            var movingUp = player.moveData.velocity.y > 0f;
             player.moveData.surfaceFriction = 1f;
 
-            if (trace.hitCollider == null || groundSlope > config.slopeLimit || (jumping && movingUp))
+            if (trace.hitCollider == null || groundSlope > config.slopeLimit || jumping && velAwayFromGround > 0.25f)
             {
                 player.groundObject = null;
                 return false;
             }
-            else
-            {
-                groundNormal = trace.planeNormal;
-                player.groundObject = trace.hitCollider.gameObject;
-                player.moveData.velocity.y = 0f;
-                return true;
-            }
+            jumping = false;
+            groundNormal = trace.planeNormal;
+            player.groundObject = trace.hitCollider.gameObject;
+            player.moveData.velocity -= velAwayFromGround * groundNormal;
+            return true;
         }
 
-        private void CalculateMovementVelocity()
+        private void CalculateMovementVelocity(float deltaTime)
         {
             if (player.moveData.desiredClimb)
             {   // Climb
@@ -140,19 +135,22 @@ namespace Movement
             }
             else
             {   // Ground movement
-                
-                player.moveData.velocity += MovementPhysics.Friction(
-                    player.moveData.velocity,
-                    player.moveData.surfaceFriction * config.friction,
-                    deltaTime,
-                    config.deceleration,
-                    true
-                );
+
+                // Use horizontal velocity
+                player.moveData.velocity.y = 0f;
+
+                if (player.moveData.velocity.sqrMagnitude > 0f)
+                    player.moveData.velocity += MovementPhysics.Friction(
+                        player.moveData.velocity,
+                        player.moveData.surfaceFriction * config.friction,
+                        deltaTime,
+                        config.deceleration
+                    );
 
                 Vector3 moveVector = Vector3.ClampMagnitude(
                     player.moveData.verticalAxis * playerTransform.forward + player.moveData.horizontalAxis * playerTransform.right, 1f);
 
-                if (moveVector.magnitude > 0f)
+                if (moveVector.sqrMagnitude > 0f)
                     player.moveData.velocity += MovementPhysics.Accelerate(
                         player.moveData.velocity,
                         moveVector.normalized,
@@ -161,8 +159,6 @@ namespace Movement
                         deltaTime
                     );
 
-                // Clamp horizontal velocity
-                player.moveData.velocity.y = 0f;
                 player.moveData.velocity = Vector3.ClampMagnitude(player.moveData.velocity, config.maxVelocity);
 
                 // Get velocity direction along ground slope
@@ -171,11 +167,11 @@ namespace Movement
                     Quaternion.AngleAxis(-90, Vector3.up) * player.moveData.velocity
                 ).normalized;
 
-                // Modify y velocity to prevent bugs caused by colliding with slopes or losing ground
-                velocityDirection.y *= velocityDirection.y < 0f ? 1.2f : 1.0f;
+                float tangent = Mathf.Tan(Vector3.Angle(velocityDirection, player.moveData.velocity) * Mathf.Deg2Rad);
+                if (velocityDirection.y < 0f) tangent *= -1;
 
                 // Set vertical velocity to follow ground slope
-                player.moveData.velocity.y = velocityDirection.y * player.moveData.velocity.magnitude;
+                player.moveData.velocity.y = tangent * player.moveData.velocity.magnitude;
             }
         }
 

@@ -84,6 +84,9 @@ public static class PhysicsUtil
             result.hitPoint = hit.point;
             result.planeNormal = hit.normal;
             result.distance = hit.distance;
+
+            if (Physics.Raycast(result.hitPoint - direction * 0.01f, direction, out hit, 0.02f, layerMask))
+                result.planeNormal = hit.normal;
         }
         else result.fraction = 1;
 

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Movement
@@ -67,17 +68,30 @@ namespace Movement
 
         private bool CheckForGround()
         {
-            var traceOrigin = player.moveData.origin;
-            traceOrigin.y += 0.01f;
+            player.moveData.surfaceFriction = 1f;
+
             var traceDestination = player.moveData.origin;
-            traceDestination.y -= config.groundCheckDistance + 0.01f;
-            var trace = PhysicsUtil.TraceCollider(player.collider, traceOrigin, traceDestination, MovementPhysics.groundLayerMask);
+            traceDestination.y -= config.groundCheckDistance;
+            var trace = PhysicsUtil.TraceCollider(player.collider, player.moveData.origin, traceDestination, MovementPhysics.groundLayerMask);
+
+            // Snap movement to downward slopes
+            if (trace.hitCollider == null && player.groundObject != null)
+            { // Just stepped off an edge
+                Vector3 rayOrigin = player.moveData.origin;
+                rayOrigin.y -= player.collider.bounds.extents.y;
+
+                // Check if there's ground directly below
+                if (Physics.Raycast(rayOrigin,Vector3.down, out var hit, 0.5f, MovementPhysics.groundLayerMask))
+                {
+                    trace.hitCollider = hit.collider;
+                    trace.planeNormal = hit.normal;
+                }
+            }
+
             float groundSlope = Vector3.Angle(Vector3.up, trace.planeNormal);
             float velAwayFromGround = Vector3.Dot(player.moveData.velocity, trace.planeNormal);
 
-            player.moveData.surfaceFriction = 1f;
-
-            if (trace.hitCollider == null || groundSlope > config.slopeLimit || jumping && velAwayFromGround > 0.25f)
+            if (trace.hitCollider == null || groundSlope > player.moveData.slopeLimit || jumping && velAwayFromGround > 0.25f)
             {
                 player.groundObject = null;
                 return false;

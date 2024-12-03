@@ -107,7 +107,8 @@ MonoBehaviour:
   weight: 75
   rigidbodyPushForce: 1
   solidCollider: 0
-  maxCameraAngle: 85
+  maxViewAngle: 85
+  viewObject: {fileID: 1290703652662459646}
   movementConfig:
     autoBhop: 1
     gravity: 20

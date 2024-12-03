@@ -1,10 +1,12 @@
+using Movement;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Movement
-{
-    public class Player : MonoBehaviour, IMovementControllable
+
+namespace Character {
+    abstract public class BaseCharacter : MonoBehaviour, IMovementControllable
     {
+
         public enum ColliderType
         {
             Capsule,
@@ -19,36 +21,31 @@ namespace Movement
         public bool solidCollider = false;
 
         [Header("View Settings")]
-        [Range(75f, 90f)] public float maxCameraAngle = 85f;
+        [Range(75f, 90f)] public float maxViewAngle = 85f;
+        public GameObject viewObject;
 
         [Header("Configs")]
         public MovementConfig movementConfig;
-        public InputConfig inputConfig;
 
-        private GameObject _groundObject;
-        private Vector3 _baseVelocity;
-        private Collider _collider;
-        private GameObject _colliderObject;
+        protected GameObject _groundObject;
+        protected Vector3 _baseVelocity;
+        protected Collider _collider;
+        protected GameObject _colliderObject;
 
-        private MoveData _moveData = new();
-        private MovementController controller;
+        protected MoveData _moveData = new();
+        protected MovementController controller;
 
-        private Rigidbody rb;
+        protected Rigidbody rb;
 
-        private List<Collider> triggers = new();
-        private int numberOfTriggers = 0;
+        protected List<Collider> triggers = new();
+        protected int numberOfTriggers = 0;
 
-        private Camera _camera;
-        private float cameraAngle = 0f;
-
-        private ClimbTool climbTool;
-        private Railgun railgun;
-        private Equipment equipped;
+        protected float viewAngle = 0f;
 
         public MovementConfig moveConfig { get { return movementConfig; } }
         public MoveData moveData { get { return _moveData; } }
         public new Collider collider { get { return _collider; } }
-        
+
         public GameObject groundObject
         {
             get { return _groundObject; }
@@ -61,8 +58,7 @@ namespace Movement
         public Vector3 right { get { return _moveData.viewTransform.right; } }
         public Vector3 up { get { return _moveData.viewTransform.up; } }
 
-
-        private void OnDrawGizmos()
+        protected void OnDrawGizmos()
         {
             if (_groundObject == null)
                 Gizmos.color = Color.red;
@@ -73,27 +69,11 @@ namespace Movement
             Gizmos.DrawLine(transform.position, transform.position + _moveData.velocity * 0.25f);
         }
 
-
-        private void Awake()
-        {
-            controller = new(this, movementConfig)
-                { playerTransform = transform };
-
-            // Hide cursor
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-
-            // Init equipment
-            climbTool = GetComponent<ClimbTool>();
-            railgun = GetComponent<Railgun>();
-            equipped = climbTool;
-        }
-
-        private void Start()
+        protected void Start()
         {
             // Add a collider object
             _colliderObject = new GameObject("PlayerCollider")
-                { layer = gameObject.layer };
+            { layer = gameObject.layer };
             _colliderObject.transform.SetParent(transform);
             _colliderObject.transform.rotation = Quaternion.identity;
             _colliderObject.transform.localPosition = Vector3.zero;
@@ -129,24 +109,20 @@ namespace Movement
                     capc.radius = colliderSize.x / 2f;
                     break;
             }
+            _collider.isTrigger = !solidCollider;
 
-
-            // Init variables
             _moveData.slopeLimit = movementConfig.slopeLimit;
             _moveData.rigidbodyPushForce = rigidbodyPushForce;
             _moveData.playerTransform = transform;
             _moveData.origin = transform.position;
+            _moveData.viewTransform = viewObject.transform;
 
-            _camera = Camera.main;
-            _moveData.viewTransform = _camera.transform;
-
-            _collider.isTrigger = !solidCollider;
+            controller = new(this, movementConfig)
+                { playerTransform = transform };
         }
 
-        private void Update()
+        protected void Update()
         {
-            GetInputs();
-
             _colliderObject.transform.rotation = Quaternion.identity;
             transform.position = _moveData.origin;
             _moveData.playerTransform = transform;
@@ -168,56 +144,19 @@ namespace Movement
             controller.ProcessMovement(Time.deltaTime);
         }
 
-        private void GetInputs()
-        {
-            // Movement
-            _moveData.verticalAxis = Input.GetAxisRaw("Vertical");
-            _moveData.horizontalAxis = Input.GetAxisRaw("Horizontal");
-
-            if (Input.GetButtonDown("Jump"))
-                _moveData.desiredJump = true;
-            if (!Input.GetButton("Jump"))
-                _moveData.desiredJump = false;
-
-            // Get mouse inputs
-            float mouseX = Input.GetAxisRaw("Mouse X") * inputConfig.sensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * inputConfig.sensY;
-            float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
-            bool mouse1 = Input.GetMouseButtonDown(0);
-
-            // Equipment
-            if (mouseWheel > 0)
-            {
-                equipped = climbTool;
-                Debug.Log("equipped climbtool");
-            }
-            else if (mouseWheel < 0)
-            {
-                equipped = railgun;
-                Debug.Log("equipped railgun");
-            }
-            if (mouse1) equipped.Use();
-
-            // View
-            transform.Rotate(transform.up, mouseX);
-            cameraAngle = Mathf.Clamp(cameraAngle + mouseY, -maxCameraAngle, maxCameraAngle);
-            _camera.transform.localRotation = Quaternion.AngleAxis(cameraAngle, Vector3.left);
-            _moveData.viewTransform = _camera.transform;
-        }
-
-        private void OnTriggerEnter(Collider other)
+        protected void OnTriggerEnter(Collider other)
         {
             if (!triggers.Contains(other))
                 triggers.Add(other);
         }
 
-        private void OnTriggerExit(Collider other)
+        protected void OnTriggerExit(Collider other)
         {
             if (triggers.Contains(other))
                 triggers.Remove(other);
         }
 
-        private void OnCollisionStay(Collision collision)
+        protected void OnCollisionStay(Collision collision)
         {
             if (collision.rigidbody == null) return;
 

@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class Railgun : Equipment
+namespace Equipment
 {
-    override public void Use()
+    public class Railgun : BaseEquipment
     {
-        if (Physics.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.forward, out RaycastHit hit))
+        override public void Use()
         {
-            Debug.DrawLine(raycastOrigin.transform.position, hit.point, new Color(255, 0, 0), 2);
+            if (Physics.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.forward, out RaycastHit hit))
+            {
+                Debug.DrawLine(raycastOrigin.transform.position, hit.point, new Color(255, 0, 0), 2);
+            }
         }
     }
 }

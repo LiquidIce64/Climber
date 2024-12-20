@@ -71,15 +71,6 @@ namespace Character {
 
         protected void Start()
         {
-            // Add a collider object
-            _colliderObject = new GameObject("PlayerCollider")
-            { layer = gameObject.layer };
-            _colliderObject.transform.SetParent(transform);
-            _colliderObject.transform.rotation = Quaternion.identity;
-            _colliderObject.transform.localPosition = Vector3.zero;
-            _colliderObject.transform.SetSiblingIndex(0);
-
-
             // Add a rigidbody
             rb = gameObject.GetComponent<Rigidbody>();
             if (rb == null)
@@ -90,20 +81,19 @@ namespace Character {
             rb.linearDamping = 0f;
             rb.mass = weight;
 
-
             // Add a collider (destroy and replace it if one already exists)
             _collider = gameObject.GetComponent<Collider>();
             if (_collider != null) Destroy(_collider);
             switch (collisionType)
             {
                 case ColliderType.Box:
-                    _collider = _colliderObject.AddComponent<BoxCollider>();
+                    _collider = gameObject.AddComponent<BoxCollider>();
                     var boxc = (BoxCollider)_collider;
                     boxc.size = colliderSize;
                     break;
 
                 case ColliderType.Capsule:
-                    _collider = _colliderObject.AddComponent<CapsuleCollider>();
+                    _collider = gameObject.AddComponent<CapsuleCollider>();
                     var capc = (CapsuleCollider)_collider;
                     capc.height = colliderSize.y;
                     capc.radius = colliderSize.x / 2f;
@@ -123,7 +113,10 @@ namespace Character {
 
         protected void Update()
         {
-            _colliderObject.transform.rotation = Quaternion.identity;
+            viewAngle = Mathf.Clamp(viewAngle, -maxViewAngle, maxViewAngle);
+            viewObject.transform.localRotation = Quaternion.AngleAxis(viewAngle, Vector3.left);
+            _moveData.viewTransform = viewObject.transform;
+
             transform.position = _moveData.origin;
             _moveData.playerTransform = transform;
 

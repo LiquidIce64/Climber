@@ -10,23 +10,27 @@ namespace Equipment
 
         private BaseCharacter character;
 
-        private void Awake()
+        protected void Awake()
         {
             character = GetComponent<BaseCharacter>();
         }
 
         override public void Use()
         {
+            if (Time.time - lastUsed < cooldown) return;
+
             // If already moving upwards fast, no reason to climb
             if (character.moveData.velocity.y > character.moveConfig.climbVelocity) return;
 
-            if (Physics.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.forward, out RaycastHit hit, rayDist))
+            // Check if ray hit a wall
+            if (!Physics.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.forward, out RaycastHit hit, rayDist)) return;
+            float a = Vector3.Angle(hit.normal, Vector3.up);
+            if (minWallAngle <= a && a <= 180f - minWallAngle)
             {
-                // Check if ray hit a wall
-                float a = Vector3.Angle(hit.normal, Vector3.up);
-                if (minWallAngle <= a && a <= 180f - minWallAngle)
-                    character.moveData.desiredClimb = true;
+                character.moveData.desiredClimb = true;
+                lastUsed = Time.time;
             }
         }
+
     }
 }

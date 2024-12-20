@@ -13,14 +13,14 @@ namespace Character
         private Railgun railgun;
         private BaseEquipment equipped;
 
-        private void Awake()
+        protected void Awake()
         {
             // Hide cursor
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
-        private new void Start()
+        protected new void Start()
         {
             // Init equipment
             climbTool = GetComponent<ClimbTool>();
@@ -30,7 +30,7 @@ namespace Character
             base.Start();
         }
 
-        private new void Update()
+        protected new void Update()
         {
             // Movement
             _moveData.verticalAxis = Input.GetAxisRaw("Vertical");
@@ -45,7 +45,7 @@ namespace Character
             float mouseX = Input.GetAxisRaw("Mouse X") * inputConfig.sensX;
             float mouseY = Input.GetAxisRaw("Mouse Y") * inputConfig.sensY;
             float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
-            bool mouse1 = Input.GetMouseButtonDown(0);
+            bool mouse1 = Input.GetMouseButton(0);
 
             // Equipment
             if (mouseWheel > 0)
@@ -62,9 +62,7 @@ namespace Character
 
             // View
             transform.Rotate(transform.up, mouseX);
-            viewAngle = Mathf.Clamp(viewAngle + mouseY, -maxViewAngle, maxViewAngle);
-            viewObject.transform.localRotation = Quaternion.AngleAxis(viewAngle, Vector3.left);
-            _moveData.viewTransform = viewObject.transform;
+            viewAngle += mouseY;
 
             base.Update();
         }

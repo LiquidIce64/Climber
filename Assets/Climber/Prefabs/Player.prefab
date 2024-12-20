@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5524665328150028705}
   - component: {fileID: 8143812681313861422}
   - component: {fileID: 8348895092872502697}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastOrigin: {fileID: 1290703652662459646}
+  cooldown: 0.9
   rayDist: 4
   minWallAngle: 75
 --- !u!114 &8348895092872502697
@@ -155,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastOrigin: {fileID: 6844212300834704391}
+  cooldown: 2
 --- !u!1 &1290703652662459646
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +169,7 @@ GameObject:
   - component: {fileID: 7153680812764656406}
   - component: {fileID: 3962133064200523501}
   - component: {fileID: 4667020227619035366}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -221,9 +223,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.2
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -302,7 +304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3066175305717096238}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Railgun Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

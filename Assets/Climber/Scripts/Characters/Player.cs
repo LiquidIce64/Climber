@@ -1,17 +1,25 @@
 using Movement;
 using Equipment;
 using UnityEngine;
+using Unity.VisualScripting;
 
 namespace Character
 {
-    [RequireComponent(typeof(ClimbTool), typeof(Railgun))]
+    [RequireComponent(typeof(ClimbTool))]
     public class Player : BaseCharacter
     {
         public InputConfig inputConfig;
 
         private ClimbTool climbTool;
+        [SerializeField] private GameObject railgunObject;
         private Railgun railgun;
         private BaseEquipment equipped;
+
+        protected void OnValidate()
+        {
+            if (railgunObject.GetComponent<Railgun>() == null)
+                Debug.LogError("Railgun component not found");
+        }
 
         protected void Awake()
         {
@@ -24,9 +32,11 @@ namespace Character
         {
             // Init equipment
             climbTool = GetComponent<ClimbTool>();
-            railgun = GetComponent<Railgun>();
+            railgun = railgunObject.GetComponent<Railgun>();
+            railgun.OnUnequipped();
+            climbTool.OnEquipped();
             equipped = climbTool;
-            
+
             base.Start();
         }
 
@@ -48,13 +58,17 @@ namespace Character
             bool mouse1 = Input.GetMouseButton(0);
 
             // Equipment
-            if (mouseWheel > 0)
+            if (equipped != climbTool && (mouseWheel < 0 || Input.GetKeyDown(KeyCode.Alpha2)))
             {
+                equipped.OnUnequipped();
+                climbTool.OnEquipped();
                 equipped = climbTool;
                 Debug.Log("equipped climbtool");
             }
-            else if (mouseWheel < 0)
+            else if (equipped != railgun && (mouseWheel > 0 || Input.GetKeyDown(KeyCode.Alpha1)))
             {
+                equipped.OnUnequipped();
+                railgun.OnEquipped();
                 equipped = railgun;
                 Debug.Log("equipped railgun");
             }

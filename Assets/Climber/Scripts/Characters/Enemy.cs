@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Character
 {
-    [RequireComponent(typeof(Railgun), typeof(NavMeshAgent))]
+    [RequireComponent(typeof(NavMeshAgent))]
     public class Enemy : BaseCharacter
     {
         [SerializeField] private GameObject path;
@@ -19,7 +19,14 @@ namespace Character
         private int pathPointInd = -1;
         private GameObject player;
         private NavMeshAgent nav;
+        [SerializeField] private GameObject railgunObject;
         private Railgun railgun;
+
+        protected void OnValidate()
+        {
+            if (railgunObject.GetComponent<Railgun>() == null)
+                Debug.LogError("Railgun component not found");
+        }
 
         protected new void Start()
         {
@@ -34,7 +41,7 @@ namespace Character
             player = GameObject.FindGameObjectWithTag("Player");
             nav = GetComponent<NavMeshAgent>();
             nav.updateUpAxis = false;
-            railgun = GetComponent<Railgun>();
+            railgun = railgunObject.GetComponent<Railgun>();
 
             base.Start();
         }

@@ -9,7 +9,7 @@ namespace Equipment
         protected BaseCharacter character;
         [SerializeField] protected GameObject raycastOrigin;
         [SerializeField] protected float cooldown;
-        protected float lastUsed = 0f;
+        protected float lastUsed = -1000f;
 
         protected void Awake()
         {

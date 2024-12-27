@@ -83,5 +83,12 @@ namespace Character
             base.Update();
         }
 
+        override protected void OnKilled()
+        {
+            // TODO: game over screen
+            health = 100f;
+            Debug.Log("Dead");
+        }
+
     }
 }

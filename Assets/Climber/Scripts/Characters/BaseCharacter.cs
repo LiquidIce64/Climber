@@ -24,7 +24,8 @@ namespace Character {
         [Range(75f, 90f)] public float maxViewAngle = 85f;
         public GameObject viewObject;
 
-        [Header("Configs")]
+        [Header("Other")]
+        [SerializeField] protected float health = 100f;
         public MovementConfig movementConfig;
 
         protected GameObject _groundObject;
@@ -156,6 +157,17 @@ namespace Character {
             Vector3 impactVelocity = 0.00005f * collision.rigidbody.mass * collision.relativeVelocity;
 
             moveData.velocity = Vector3.ClampMagnitude(_moveData.velocity + impactVelocity, movementConfig.maxVelocity);
+        }
+
+        public void ApplyDamage(float damage)
+        {
+            health -= damage;
+            if (health <= 0f) OnKilled();
+        }
+
+        virtual protected void OnKilled()
+        {
+            Destroy(gameObject);
         }
 
     }

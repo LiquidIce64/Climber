@@ -108,6 +108,7 @@ MonoBehaviour:
   solidCollider: 0
   maxViewAngle: 85
   viewObject: {fileID: 8276342782396498596}
+  health: 100
   movementConfig:
     autoBhop: 1
     gravity: 20
@@ -204,19 +205,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9998763
       objectReference: {fileID: 0}
     - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.008725717
       objectReference: {fileID: 0}
     - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.013089085
       objectReference: {fileID: 0}
     - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000029802319
+      value: -0.000114225775
       objectReference: {fileID: 0}
     - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

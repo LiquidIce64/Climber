@@ -2507,7 +2507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -3145,7 +3145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -4192,7 +4192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -6612,7 +6612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -6898,7 +6898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -9791,7 +9791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -9967,7 +9967,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -11442,6 +11442,14 @@ PrefabInstance:
     - target: {fileID: 476006022305437211, guid: 16a3315c0843a054f918fafd6ef87455, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2515966093231490595, guid: 16a3315c0843a054f918fafd6ef87455, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2515966093231490595, guid: 16a3315c0843a054f918fafd6ef87455, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4302424340475528760, guid: 16a3315c0843a054f918fafd6ef87455, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13071,7 +13079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -15190,7 +15198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -17325,7 +17333,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -17598,6 +17606,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.69923306
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.39999485
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.7502756
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99983877
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.008725983
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.01569369
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000091495116
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -1.799
+      objectReference: {fileID: 0}
+    - target: {fileID: 177373600510112011, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 1300876554132292611, guid: 5d7e99aeb60172c4baedf14d01a7d5e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.25

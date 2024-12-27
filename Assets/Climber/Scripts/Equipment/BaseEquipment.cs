@@ -1,12 +1,20 @@
+using Character;
 using UnityEngine;
 
 namespace Equipment
 {
     abstract public class BaseEquipment : MonoBehaviour
     {
+        [SerializeField] protected GameObject characterObject;
+        protected BaseCharacter character;
         [SerializeField] protected GameObject raycastOrigin;
         [SerializeField] protected float cooldown;
         protected float lastUsed = 0f;
+
+        protected void Awake()
+        {
+            character = characterObject.GetComponent<BaseCharacter>();
+        }
 
         abstract public void Use();
 

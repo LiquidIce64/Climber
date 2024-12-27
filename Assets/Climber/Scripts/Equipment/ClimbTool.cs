@@ -8,13 +8,6 @@ namespace Equipment
         public float rayDist = 2f;
         [Range(60f, 90f)] public float minWallAngle = 75f;
 
-        private BaseCharacter character;
-
-        protected void Awake()
-        {
-            character = GetComponent<BaseCharacter>();
-        }
-
         override public void Use()
         {
             if (Time.time - lastUsed < cooldown) return;

@@ -5,11 +5,11 @@ using Unity.VisualScripting;
 
 namespace Character
 {
-    [RequireComponent(typeof(ClimbTool))]
     public class Player : BaseCharacter
     {
         public InputConfig inputConfig;
 
+        [SerializeField] private GameObject climbToolObject;
         private ClimbTool climbTool;
         [SerializeField] private GameObject railgunObject;
         private Railgun railgun;
@@ -19,6 +19,8 @@ namespace Character
         {
             if (railgunObject.GetComponent<Railgun>() == null)
                 Debug.LogError("Railgun component not found");
+            if (climbToolObject.GetComponent<ClimbTool>() == null)
+                Debug.LogError("ClimbTool component not found");
         }
 
         protected void Awake()
@@ -31,7 +33,7 @@ namespace Character
         protected new void Start()
         {
             // Init equipment
-            climbTool = GetComponent<ClimbTool>();
+            climbTool = climbToolObject.GetComponent<ClimbTool>();
             railgun = railgunObject.GetComponent<Railgun>();
             railgun.OnUnequipped();
             climbTool.OnEquipped();

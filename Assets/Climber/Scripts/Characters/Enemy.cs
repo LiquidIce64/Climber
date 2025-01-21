@@ -19,14 +19,7 @@ namespace Character
         private int pathPointInd = -1;
         private GameObject player;
         private NavMeshAgent nav;
-        [SerializeField] private GameObject railgunObject;
-        private Railgun railgun;
-
-        protected void OnValidate()
-        {
-            if (railgunObject.GetComponent<Railgun>() == null)
-                Debug.LogError("Railgun component not found");
-        }
+        [SerializeField] private Railgun railgun;
 
         protected new void Start()
         {
@@ -41,7 +34,6 @@ namespace Character
             player = GameObject.FindGameObjectWithTag("Player");
             nav = GetComponent<NavMeshAgent>();
             nav.updateUpAxis = false;
-            railgun = railgunObject.GetComponent<Railgun>();
 
             base.Start();
         }

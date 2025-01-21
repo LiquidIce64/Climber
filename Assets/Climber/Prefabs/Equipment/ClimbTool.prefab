@@ -81,7 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32728ba400faaf344aa4ee84da0fc89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
   raycastOrigin: {fileID: 0}
-  cooldown: 0.9
+  cooldown: 1.5
+  energyConsumption: 0
   rayDist: 4
   minWallAngle: 75

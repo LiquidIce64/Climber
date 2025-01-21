@@ -12,6 +12,7 @@ namespace Equipment
         override public void Use()
         {
             if (Time.time - lastUsed < cooldown) return;
+            if (player != null && player.TakeEnergy(energyConsumption) == 0f) return;
 
             float length;
 

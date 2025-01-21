@@ -1,27 +1,22 @@
 using Movement;
 using Equipment;
 using UnityEngine;
-using Unity.VisualScripting;
 
 namespace Character
 {
     public class Player : BaseCharacter
     {
+        [SerializeField] protected float maxEnergy = 100f;
+        protected float energy;
+
         public InputConfig inputConfig;
 
-        [SerializeField] private GameObject climbToolObject;
-        private ClimbTool climbTool;
-        [SerializeField] private GameObject railgunObject;
-        private Railgun railgun;
+        [SerializeField] private ClimbTool climbTool;
+        [SerializeField] private Railgun railgun;
         private BaseEquipment equipped;
 
-        protected void OnValidate()
-        {
-            if (railgunObject.GetComponent<Railgun>() == null)
-                Debug.LogError("Railgun component not found");
-            if (climbToolObject.GetComponent<ClimbTool>() == null)
-                Debug.LogError("ClimbTool component not found");
-        }
+        public float Energy { get { return energy; } }
+        public float MaxEnergy { get { return maxEnergy; } }
 
         protected void Awake()
         {
@@ -32,9 +27,9 @@ namespace Character
 
         protected new void Start()
         {
+            energy = maxEnergy;
+
             // Init equipment
-            climbTool = climbToolObject.GetComponent<ClimbTool>();
-            railgun = railgunObject.GetComponent<Railgun>();
             railgun.OnUnequipped();
             climbTool.OnEquipped();
             equipped = climbTool;
@@ -65,14 +60,12 @@ namespace Character
                 equipped.OnUnequipped();
                 climbTool.OnEquipped();
                 equipped = climbTool;
-                Debug.Log("equipped climbtool");
             }
             else if (equipped != railgun && (mouseWheel > 0 || Input.GetKeyDown(KeyCode.Alpha1)))
             {
                 equipped.OnUnequipped();
                 railgun.OnEquipped();
                 equipped = railgun;
-                Debug.Log("equipped railgun");
             }
             if (mouse1) equipped.Use();
 
@@ -83,11 +76,48 @@ namespace Character
             base.Update();
         }
 
+        public float AddEnergy(float amount)
+        {
+            float energyAdded = energy;
+            energy = Mathf.Min(energy + amount, maxEnergy);
+            energyAdded = energy - energyAdded;
+            return energyAdded;
+        }
+
+        public float TakeEnergy(float amount, bool forced = false)
+        {
+            float energyTaken = 0f;
+            if (energy >= amount)
+            {
+                energyTaken = amount;
+                energy -= amount;
+            }
+            else if (forced)
+            {
+                energyTaken = energy;
+                energy = 0f;
+            }
+            return energyTaken;
+        }
+
+        override public void ApplyDamage(float damage)
+        {
+            base.ApplyDamage(damage - TakeEnergy(damage, true));
+        }
+
         override protected void OnKilled()
         {
             // TODO: game over screen
-            health = 100f;
+            health = 0f;
             Debug.Log("Dead");
+        }
+
+        protected void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.TryGetComponent<ITriggerItem>(out var triggerItem))
+            {
+                triggerItem.TriggerAction(this);
+            }
         }
 
     }

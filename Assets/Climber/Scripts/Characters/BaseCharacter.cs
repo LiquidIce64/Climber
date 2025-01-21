@@ -1,5 +1,4 @@
 using Movement;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -25,7 +24,9 @@ namespace Character {
         public GameObject viewObject;
 
         [Header("Other")]
-        [SerializeField] protected float health = 100f;
+        [SerializeField] protected float maxHealth = 100f;
+        protected float health;
+
         public MovementConfig movementConfig;
 
         protected GameObject _groundObject;
@@ -37,9 +38,6 @@ namespace Character {
         protected MovementController controller;
 
         protected Rigidbody rb;
-
-        protected List<Collider> triggers = new();
-        protected int numberOfTriggers = 0;
 
         protected float viewAngle = 0f;
 
@@ -59,6 +57,9 @@ namespace Character {
         public Vector3 right { get { return _moveData.viewTransform.right; } }
         public Vector3 up { get { return _moveData.viewTransform.up; } }
 
+        public float Health { get { return health; } }
+        public float MaxHealth { get { return maxHealth; } }
+
         protected void OnDrawGizmos()
         {
             if (_groundObject == null)
@@ -72,6 +73,8 @@ namespace Character {
 
         protected void Start()
         {
+            health = maxHealth;
+
             // Add a rigidbody
             rb = gameObject.GetComponent<Rigidbody>();
             if (rb == null)
@@ -121,33 +124,7 @@ namespace Character {
             transform.position = _moveData.origin;
             _moveData.playerTransform = transform;
 
-            // Handle triggers
-            if (numberOfTriggers != triggers.Count)
-            {
-                triggers.RemoveAll(item => item == null);
-                foreach (Collider trigger in triggers)
-                {
-                    if (trigger == null) continue;
-
-                    // Put trigger handling here
-
-                }
-                numberOfTriggers = triggers.Count;
-            }
-
             controller.ProcessMovement(Time.deltaTime);
-        }
-
-        protected void OnTriggerEnter(Collider other)
-        {
-            if (!triggers.Contains(other))
-                triggers.Add(other);
-        }
-
-        protected void OnTriggerExit(Collider other)
-        {
-            if (triggers.Contains(other))
-                triggers.Remove(other);
         }
 
         protected void OnCollisionStay(Collision collision)
@@ -159,7 +136,7 @@ namespace Character {
             moveData.velocity = Vector3.ClampMagnitude(_moveData.velocity + impactVelocity, movementConfig.maxVelocity);
         }
 
-        public void ApplyDamage(float damage)
+        virtual public void ApplyDamage(float damage)
         {
             health -= damage;
             if (health <= 0f) OnKilled();

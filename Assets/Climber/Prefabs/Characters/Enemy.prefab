@@ -108,7 +108,7 @@ MonoBehaviour:
   solidCollider: 0
   maxViewAngle: 85
   viewObject: {fileID: 8276342782396498596}
-  health: 100
+  maxHealth: 100
   movementConfig:
     autoBhop: 1
     gravity: 20
@@ -128,7 +128,7 @@ MonoBehaviour:
   patrolSpeed: 4
   maxChaseDistance: 20
   stoppingDistance: 5
-  railgunObject: {fileID: 3079096184325579403}
+  railgun: {fileID: 7037904217657832166}
 --- !u!195 &3031415990616369165
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -192,34 +192,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 337508218602103223}
     m_Modifications:
     - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9998763
-      objectReference: {fileID: 0}
-    - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.008725717
-      objectReference: {fileID: 0}
-    - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.013089085
-      objectReference: {fileID: 0}
-    - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.000114225775
-      objectReference: {fileID: 0}
-    - target: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -240,6 +212,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8891104886745911875, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 9125997061791121846}
+    - target: {fileID: 8891104886745911875, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
       propertyPath: characterObject
       value: 
       objectReference: {fileID: 4651808351659378880}
@@ -253,8 +229,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1782875735168569774, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
   m_PrefabInstance: {fileID: 1929832372443619493}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3079096184325579403 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3491136314167886382, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
+--- !u!114 &7037904217657832166 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8891104886745911875, guid: 4e11f224620d7af4f80f2a0c14937976, type: 3}
   m_PrefabInstance: {fileID: 1929832372443619493}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad59fdb290941941a6722a192c5a53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

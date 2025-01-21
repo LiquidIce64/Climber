@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3491136314167886382}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -0.4, z: 0.75}
+  m_LocalRotation: {x: -0.008725983, y: -0.01569369, z: -0.000091495116, w: 0.99983877}
+  m_LocalPosition: {x: 0.69923306, y: -0.39999485, z: 0.7502756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad59fdb290941941a6722a192c5a53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterObject: {fileID: 0}
+  character: {fileID: 0}
   raycastOrigin: {fileID: 3491136314167886382}
   cooldown: 2
+  energyConsumption: 0
   energyRay: {fileID: 7417787343763292834, guid: 9e75733017ddd934cb30eccb33bca715, type: 3}
   knockback: 2.5
   damage: 100

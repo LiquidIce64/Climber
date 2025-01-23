@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1552930654594956241}
-  - component: {fileID: 3989536057830972147}
   - component: {fileID: 4945347605367730372}
+  - component: {fileID: 3989536057830972147}
   m_Layer: 1
   m_Name: Energy Ray
   m_TagString: Untagged
@@ -33,6 +33,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4945347605367730372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7417787343763292834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94030aa34fb36f94289e0931e9ad6dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.5
+  start_width: 0.1
 --- !u!120 &3989536057830972147
 LineRenderer:
   serializedVersion: 2
@@ -140,16 +154,3 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &4945347605367730372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417787343763292834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94030aa34fb36f94289e0931e9ad6dda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 0.5

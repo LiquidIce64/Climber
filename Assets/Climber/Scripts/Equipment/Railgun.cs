@@ -5,9 +5,10 @@ namespace Equipment
 {
     public class Railgun : BaseEquipment
     {
-        [SerializeField] private GameObject energyRay;
         [SerializeField] private float knockback;
         [SerializeField] private float damage;
+        [SerializeField] protected GameObject energyRay;
+        [SerializeField] protected GameObject sparkParticles;
 
         override public void Use()
         {
@@ -26,6 +27,7 @@ namespace Equipment
 
             var ray = Instantiate(energyRay, raycastOrigin.transform.position, raycastOrigin.transform.rotation);
             ray.transform.localScale = new Vector3(1f, 1f, length);
+            Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
 
             character.moveData.velocity -= transform.forward * knockback;
 

@@ -1,5 +1,6 @@
 using Character;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Equipment
 {
@@ -7,6 +8,9 @@ namespace Equipment
     {
         public float rayDist = 2f;
         [Range(60f, 90f)] public float minWallAngle = 75f;
+        [SerializeField] protected Transform[] rayOrigins;
+        [SerializeField] protected GameObject energyRay;
+        [SerializeField] protected GameObject sparkParticles;
 
         protected new void Awake()
         {
@@ -19,7 +23,7 @@ namespace Equipment
             if (Time.time - lastUsed < cooldown) return;
 
             // If already moving upwards fast, no reason to climb
-            if (character.moveData.velocity.y > character.moveConfig.climbVelocity) return;
+            if (character.moveData.velocity.y >= character.moveConfig.climbVelocity) return;
 
             // Check if ray hit a wall
             if (!Physics.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.forward, out RaycastHit hit, rayDist)) return;
@@ -28,6 +32,19 @@ namespace Equipment
             {
                 if (player != null && player.TakeEnergy(energyConsumption) == 0f) return;
                 character.moveData.desiredClimb = true;
+
+                foreach (Transform origin in rayOrigins) {
+                    Vector3 rayVec = hit.point - origin.position;
+                    var ray = Instantiate(energyRay);
+                    ray.transform.position = origin.position;
+                    ray.transform.rotation = Quaternion.LookRotation(rayVec.normalized);
+                    ray.transform.localScale = new Vector3(1f, 1f, rayVec.magnitude);
+                    var rayComp = ray.GetComponent<EnergyRay>();
+                    rayComp.duration /= 2f;
+                    rayComp.start_width *= origin.localScale.x;
+                }
+                Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
+
                 lastUsed = Time.time;
             }
         }

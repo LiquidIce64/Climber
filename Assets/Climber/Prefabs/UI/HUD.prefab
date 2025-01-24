@@ -269,6 +269,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3128126233402065740, guid: 0d5a8575bb153ff4ab52a606e0426805, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a894101cd976ac84dbd515325367771e, type: 3}
     - target: {fileID: 3827075172512535600, guid: 0d5a8575bb153ff4ab52a606e0426805, type: 3}
       propertyPath: m_Name
       value: RailgunSlot
@@ -371,6 +375,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3128126233402065740, guid: 0d5a8575bb153ff4ab52a606e0426805, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a43f4d4774d39854bb1f64246b171215, type: 3}
     - target: {fileID: 3827075172512535600, guid: 0d5a8575bb153ff4ab52a606e0426805, type: 3}
       propertyPath: m_Name
       value: ClimbToolSlot

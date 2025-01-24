@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8317192107916452088}
   - component: {fileID: 3877780256992197972}
   - component: {fileID: 6254992684209279715}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1492076262627367781}
   - component: {fileID: 702816750093211667}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cooldown Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 1282713815949234815}
   - component: {fileID: 3030568008592725206}
   - component: {fileID: 316553824274558345}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}

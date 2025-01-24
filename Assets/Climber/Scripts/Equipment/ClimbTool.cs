@@ -36,14 +36,15 @@ namespace Equipment
                 foreach (Transform origin in rayOrigins) {
                     Vector3 rayVec = hit.point - origin.position;
                     var ray = Instantiate(energyRay);
-                    ray.transform.position = origin.position;
-                    ray.transform.rotation = Quaternion.LookRotation(rayVec.normalized);
+                    ray.layer = gameObject.layer;
+                    ray.transform.SetPositionAndRotation(origin.position, Quaternion.LookRotation(rayVec.normalized));
                     ray.transform.localScale = new Vector3(1f, 1f, rayVec.magnitude);
                     var rayComp = ray.GetComponent<EnergyRay>();
                     rayComp.duration /= 2f;
                     rayComp.start_width *= origin.localScale.x;
                 }
-                Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
+                var particles = Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
+                particles.layer = gameObject.layer;
 
                 lastUsed = Time.time;
             }

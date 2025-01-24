@@ -52,6 +52,7 @@ MonoBehaviour:
   energyConsumption: 0
   knockback: 2.5
   damage: 100
+  rayOrigin: {fileID: 1782875735168569774}
   energyRay: {fileID: 7417787343763292834, guid: 9e75733017ddd934cb30eccb33bca715, type: 3}
   sparkParticles: {fileID: 4412303498262091382, guid: ba11fabfb03fdee40aff0378adb52da7, type: 3}
 --- !u!1001 &1419174096648315610

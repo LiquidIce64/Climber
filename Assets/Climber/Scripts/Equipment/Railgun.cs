@@ -1,5 +1,6 @@
 using Character;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 namespace Equipment
 {
@@ -7,6 +8,7 @@ namespace Equipment
     {
         [SerializeField] private float knockback;
         [SerializeField] private float damage;
+        [SerializeField] protected Transform rayOrigin;
         [SerializeField] protected GameObject energyRay;
         [SerializeField] protected GameObject sparkParticles;
 
@@ -15,19 +17,33 @@ namespace Equipment
             if (Time.time - lastUsed < cooldown) return;
             if (player != null && player.TakeEnergy(energyConsumption) == 0f) return;
 
-            float length;
-
+            var ray = Instantiate(energyRay);
+            ray.layer = gameObject.layer;
             if (Physics.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.forward, out RaycastHit hit))
             {
-                length = hit.distance;
                 if (hit.collider.gameObject.TryGetComponent<BaseCharacter>(out var character))
                     character.ApplyDamage(damage);
-            }
-            else length = 1000f;
 
-            var ray = Instantiate(energyRay, raycastOrigin.transform.position, raycastOrigin.transform.rotation);
-            ray.transform.localScale = new Vector3(1f, 1f, length);
-            Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
+                if (hit.distance < 3f)
+                {
+                    ray.transform.SetPositionAndRotation(rayOrigin.position, rayOrigin.rotation);
+                    ray.transform.localScale = new Vector3(1f, 1f, Mathf.Max(1f, hit.distance));
+                }
+                else
+                {
+                    Vector3 rayVec = hit.point - rayOrigin.position;
+                    ray.transform.SetPositionAndRotation(rayOrigin.position, Quaternion.LookRotation(rayVec.normalized));
+                    ray.transform.localScale = new Vector3(1f, 1f, rayVec.magnitude);
+                }
+
+                var particles = Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
+                particles.layer = gameObject.layer;
+            }
+            else
+            {
+                ray.transform.SetPositionAndRotation(rayOrigin.position, rayOrigin.rotation);
+                ray.transform.localScale = new Vector3(1f, 1f, 1000f);
+            }
 
             character.moveData.velocity -= transform.forward * knockback;
 

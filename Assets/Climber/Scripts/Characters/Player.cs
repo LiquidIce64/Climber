@@ -14,6 +14,7 @@ namespace Character
         [SerializeField] private ClimbTool climbTool;
         [SerializeField] private Railgun railgun;
         private BaseEquipment equipped;
+        private AudioSource audioSource;
 
         public float Energy { get { return energy; } }
         public float MaxEnergy { get { return maxEnergy; } }
@@ -33,6 +34,7 @@ namespace Character
             railgun.OnUnequipped();
             climbTool.OnEquipped();
             equipped = climbTool;
+            audioSource = GetComponent<AudioSource>();
 
             base.Start();
         }
@@ -110,6 +112,12 @@ namespace Character
             // TODO: game over screen
             health = 0f;
             Debug.Log("Dead");
+        }
+
+        public void PlaySound(AudioClip sound)
+        {
+            audioSource.clip = sound;
+            audioSource.Play();
         }
 
         protected void OnTriggerEnter(Collider other)

@@ -6,6 +6,7 @@ namespace Equipment
     public class BasePickupItem: MonoBehaviour, ITriggerItem
     {
         [SerializeField] protected float rotationSpeed = 45f;
+        [SerializeField] protected AudioClip pickupSound;
 
         protected void Update()
         {
@@ -16,7 +17,11 @@ namespace Equipment
 
         public void TriggerAction(Player player)
         {
-            if (OnPickUp(player)) Destroy(gameObject);
+            if (OnPickUp(player))
+            {
+                Destroy(gameObject);
+                player.PlaySound(pickupSound);
+            }
         }
     }
 }

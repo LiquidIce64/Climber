@@ -50,6 +50,7 @@ MonoBehaviour:
   raycastOrigin: {fileID: 3491136314167886382}
   cooldown: 2
   energyConsumption: 0
+  audioSource: {fileID: 0}
   knockback: 2.5
   damage: 100
   rayOrigin: {fileID: 1782875735168569774}

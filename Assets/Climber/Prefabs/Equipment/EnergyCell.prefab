@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 45
+  pickupSound: {fileID: 8300000, guid: 1e2a4a2444bdde04da43ee44b59ef187, type: 3}
   energy: 500
 --- !u!135 &3612333601294629367
 SphereCollider:

@@ -47,6 +47,8 @@ namespace Equipment
 
             character.moveData.velocity -= transform.forward * knockback;
 
+            audioSource.Play();
+
             lastUsed = Time.time;
         }
 

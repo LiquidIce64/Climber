@@ -46,6 +46,8 @@ namespace Equipment
                 var particles = Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
                 particles.layer = gameObject.layer;
 
+                audioSource.Play();
+
                 lastUsed = Time.time;
             }
         }

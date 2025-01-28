@@ -11,6 +11,7 @@ namespace Equipment
         [SerializeField] protected float cooldown;
         [SerializeField] protected float energyConsumption;
         protected float lastUsed = -1000f;
+        [SerializeField] protected AudioSource audioSource;
 
         public float CooldownFraction { get {
             if (cooldown == 0f) return 0f;

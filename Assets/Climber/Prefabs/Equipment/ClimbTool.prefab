@@ -224,6 +224,7 @@ MonoBehaviour:
   raycastOrigin: {fileID: 0}
   cooldown: 1.5
   energyConsumption: 0
+  audioSource: {fileID: 0}
   rayDist: 4
   minWallAngle: 75
   rayOrigins:

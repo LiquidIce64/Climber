@@ -6,10 +6,10 @@ namespace Character
 {
     public class Player : BaseCharacter
     {
+        public InputConfig inputConfig;
+
         [SerializeField] protected float maxEnergy = 100f;
         protected float energy;
-
-        public InputConfig inputConfig;
 
         [SerializeField] private ClimbTool climbTool;
         [SerializeField] private Railgun railgun;
@@ -19,24 +19,20 @@ namespace Character
         public float Energy { get { return energy; } }
         public float MaxEnergy { get { return maxEnergy; } }
 
-        protected void Awake()
+        protected new void Awake()
         {
-            // Hide cursor
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+            base.Awake();
 
-        protected new void Start()
-        {
+            audioSource = GetComponent<AudioSource>();
             energy = maxEnergy;
 
-            // Init equipment
             railgun.OnUnequipped();
             climbTool.OnEquipped();
             equipped = climbTool;
-            audioSource = GetComponent<AudioSource>();
 
-            base.Start();
+            // Hide cursor
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         protected new void Update()

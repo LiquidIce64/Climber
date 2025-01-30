@@ -1,6 +1,5 @@
 using Character;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 namespace Equipment
 {
@@ -19,7 +18,7 @@ namespace Equipment
 
             var ray = Instantiate(energyRay);
             ray.layer = gameObject.layer;
-            if (Physics.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.forward, out RaycastHit hit))
+            if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit))
             {
                 if (hit.collider.gameObject.TryGetComponent<BaseCharacter>(out var character))
                     character.ApplyDamage(damage);

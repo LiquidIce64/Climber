@@ -7,7 +7,7 @@ namespace Equipment
     {
         [SerializeField] protected BaseCharacter character;
         protected Player player = null;
-        [SerializeField] protected GameObject raycastOrigin;
+        [SerializeField] protected Transform raycastOrigin;
         [SerializeField] protected float cooldown;
         [SerializeField] protected float energyConsumption;
         protected float lastUsed = -1000f;

@@ -21,8 +21,10 @@ namespace Character
         private NavMeshAgent nav;
         [SerializeField] private Railgun railgun;
 
-        protected new void Start()
+        protected new void Awake()
         {
+            base.Awake();
+
             chaseSpeed = movementConfig.walkSpeed;
             movementConfig.walkSpeed = patrolSpeed;
 
@@ -34,17 +36,15 @@ namespace Character
             player = GameObject.FindGameObjectWithTag("Player");
             nav = GetComponent<NavMeshAgent>();
             nav.updateUpAxis = false;
-
-            base.Start();
         }
 
         protected new void Update()
         {
-            float distanceToPlayer = (player.transform.position - viewObject.transform.position).magnitude;
-            Vector3 directionToPlayer = (player.transform.position - viewObject.transform.position).normalized;
+            float distanceToPlayer = (player.transform.position - viewTransform.position).magnitude;
+            Vector3 directionToPlayer = (player.transform.position - viewTransform.position).normalized;
             if (distanceToPlayer <= maxChaseDistance &&
                 Physics.Raycast(
-                    viewObject.transform.position,
+                    viewTransform.position,
                     directionToPlayer,
                     out var hit,
                     maxChaseDistance,

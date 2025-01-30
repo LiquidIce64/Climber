@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  raycastOrigin: {fileID: 3491136314167886382}
+  raycastOrigin: {fileID: 1782875735168569774}
   cooldown: 2
   energyConsumption: 0
   audioSource: {fileID: 0}

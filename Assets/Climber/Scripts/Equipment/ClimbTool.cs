@@ -1,6 +1,5 @@
 using Character;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Equipment
 {
@@ -26,7 +25,7 @@ namespace Equipment
             if (character.moveData.velocity.y >= character.moveConfig.climbVelocity) return;
 
             // Check if ray hit a wall
-            if (!Physics.Raycast(raycastOrigin.transform.position, raycastOrigin.transform.forward, out RaycastHit hit, rayDist)) return;
+            if (!Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit, rayDist)) return;
             float a = Vector3.Angle(hit.normal, Vector3.up);
             if (minWallAngle <= a && a <= 180f - minWallAngle)
             {

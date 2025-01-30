@@ -3,41 +3,28 @@ using UnityEngine;
 
 
 namespace Character {
+    [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
     abstract public class BaseCharacter : MonoBehaviour, IMovementControllable
     {
-
-        public enum ColliderType
-        {
-            Capsule,
-            Box
-        }
-        public ColliderType collisionType = ColliderType.Capsule;
-
         [Header("Physics Settings")]
-        public Vector3 colliderSize = new(1f, 2f, 1f);
-        public float weight = 75f;
         public float rigidbodyPushForce = 1f;
-        public bool solidCollider = false;
 
         [Header("View Settings")]
         [Range(75f, 90f)] public float maxViewAngle = 85f;
-        public GameObject viewObject;
+        public Transform viewTransform;
 
         [Header("Other")]
         [SerializeField] protected float maxHealth = 100f;
         protected float health;
 
-        public MovementConfig movementConfig;
+        [SerializeField] protected MovementConfig movementConfig;
 
         protected GameObject _groundObject;
         protected Vector3 _baseVelocity;
         protected Collider _collider;
-        protected GameObject _colliderObject;
 
         protected MoveData _moveData = new();
         protected MovementController controller;
-
-        protected Rigidbody rb;
 
         protected float viewAngle = 0f;
 
@@ -62,54 +49,21 @@ namespace Character {
 
         protected void OnDrawGizmos()
         {
-            if (_groundObject == null)
-                Gizmos.color = Color.red;
-            else
-                Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(transform.position, colliderSize);
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(transform.position, transform.position + _moveData.velocity * 0.25f);
         }
 
-        protected void Start()
+        protected void Awake()
         {
             health = maxHealth;
 
-            // Add a rigidbody
-            rb = gameObject.GetComponent<Rigidbody>();
-            if (rb == null)
-                rb = gameObject.AddComponent<Rigidbody>();
-            rb.isKinematic = true;
-            rb.useGravity = false;
-            rb.angularDamping = 0f;
-            rb.linearDamping = 0f;
-            rb.mass = weight;
-
-            // Add a collider (destroy and replace it if one already exists)
-            _collider = gameObject.GetComponent<Collider>();
-            if (_collider != null) Destroy(_collider);
-            switch (collisionType)
-            {
-                case ColliderType.Box:
-                    _collider = gameObject.AddComponent<BoxCollider>();
-                    var boxc = (BoxCollider)_collider;
-                    boxc.size = colliderSize;
-                    break;
-
-                case ColliderType.Capsule:
-                    _collider = gameObject.AddComponent<CapsuleCollider>();
-                    var capc = (CapsuleCollider)_collider;
-                    capc.height = colliderSize.y;
-                    capc.radius = colliderSize.x / 2f;
-                    break;
-            }
-            _collider.isTrigger = !solidCollider;
+            _collider = GetComponent<Collider>();
 
             _moveData.slopeLimit = movementConfig.slopeLimit;
             _moveData.rigidbodyPushForce = rigidbodyPushForce;
             _moveData.playerTransform = transform;
             _moveData.origin = transform.position;
-            _moveData.viewTransform = viewObject.transform;
+            _moveData.viewTransform = viewTransform;
 
             controller = new(this, movementConfig)
                 { playerTransform = transform };
@@ -118,8 +72,8 @@ namespace Character {
         protected void Update()
         {
             viewAngle = Mathf.Clamp(viewAngle, -maxViewAngle, maxViewAngle);
-            viewObject.transform.localRotation = Quaternion.AngleAxis(viewAngle, Vector3.left);
-            _moveData.viewTransform = viewObject.transform;
+            viewTransform.localRotation = Quaternion.AngleAxis(viewAngle, Vector3.left);
+            _moveData.viewTransform = viewTransform;
 
             transform.position = _moveData.origin;
             _moveData.playerTransform = transform;
@@ -139,7 +93,10 @@ namespace Character {
         virtual public void ApplyDamage(float damage)
         {
             health -= damage;
-            if (health <= 0f) OnKilled();
+            if (health <= 0f) {
+                health = 0f;
+                OnKilled();
+            }
         }
 
         virtual protected void OnKilled()

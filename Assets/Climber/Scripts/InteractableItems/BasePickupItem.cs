@@ -1,9 +1,9 @@
 using Character;
 using UnityEngine;
 
-namespace Equipment
+namespace InteractableItems
 {
-    public class BasePickupItem: MonoBehaviour, ITriggerItem
+    public class BasePickupItem : MonoBehaviour, ITriggerItem
     {
         [SerializeField] protected float rotationSpeed = 45f;
         [SerializeField] protected AudioClip pickupSound;

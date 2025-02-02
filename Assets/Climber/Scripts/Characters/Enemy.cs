@@ -40,38 +40,42 @@ namespace Character
 
         protected new void Update()
         {
-            float distanceToPlayer = (player.transform.position - viewTransform.position).magnitude;
-            Vector3 directionToPlayer = (player.transform.position - viewTransform.position).normalized;
-            if (distanceToPlayer <= maxChaseDistance &&
-                Physics.Raycast(
-                    viewTransform.position,
-                    directionToPlayer,
-                    out var hit,
-                    maxChaseDistance,
-                    LayerMask.GetMask("Default", "Characters")
-                ) && hit.collider.gameObject == player)
-            { // Has direct line of sight of player
-                chasing = true;
-                movementConfig.walkSpeed = chaseSpeed;
-                nav.destination = player.transform.position;
-                chaseTimeout = Time.time + 5f;
-                Vector3 horizDir = directionToPlayer;
-                horizDir.y = 0;
-                horizDir.Normalize();
-                transform.rotation = Quaternion.LookRotation(horizDir);
-                viewAngle = Vector3.SignedAngle(directionToPlayer, transform.forward, transform.right);
-                railgun.Use();
-            }
-            else if (chasing)
-            { // Lost sight but still chasing
-                if (Time.time >= chaseTimeout)
-                {
-                    chasing = false;
-                    movementConfig.walkSpeed = patrolSpeed;
-                    nav.ResetPath();
-                    viewAngle = 0f;
+            float distanceToPlayer = 0f;
+            if (player != null)
+            {
+                distanceToPlayer = (player.transform.position - viewTransform.position).magnitude;
+                Vector3 directionToPlayer = (player.transform.position - viewTransform.position).normalized;
+                if (distanceToPlayer <= maxChaseDistance &&
+                    Physics.Raycast(
+                        viewTransform.position,
+                        directionToPlayer,
+                        out var hit,
+                        maxChaseDistance,
+                        LayerMask.GetMask("Default", "Characters")
+                    ) && hit.collider.gameObject == player)
+                { // Has direct line of sight of player
+                    chasing = true;
+                    movementConfig.walkSpeed = chaseSpeed;
+                    nav.destination = player.transform.position;
+                    chaseTimeout = Time.time + 5f;
+                    Vector3 horizDir = directionToPlayer;
+                    horizDir.y = 0;
+                    horizDir.Normalize();
+                    transform.rotation = Quaternion.LookRotation(horizDir);
+                    viewAngle = Vector3.SignedAngle(directionToPlayer, transform.forward, transform.right);
+                    railgun.Use();
                 }
-                else nav.destination = player.transform.position;
+                else if (chasing)
+                { // Lost sight but still chasing
+                    if (Time.time >= chaseTimeout)
+                    {
+                        chasing = false;
+                        movementConfig.walkSpeed = patrolSpeed;
+                        nav.ResetPath();
+                        viewAngle = 0f;
+                    }
+                    else nav.destination = player.transform.position;
+                }
             }
 
             if (!nav.hasPath && !nav.pathPending)
@@ -81,7 +85,7 @@ namespace Character
                 nav.destination = pathPoints[pathPointInd];
             }
 
-            if (chasing && distanceToPlayer <= stoppingDistance)
+            if (player != null && chasing && distanceToPlayer <= stoppingDistance)
             {
                 _moveData.horizontalAxis = 0f;
                 _moveData.verticalAxis = 0f;

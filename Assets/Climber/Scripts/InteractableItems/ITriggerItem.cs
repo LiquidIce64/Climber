@@ -1,7 +1,6 @@
 using Character;
-using UnityEngine;
 
-namespace Equipment
+namespace InteractableItems
 {
     public interface ITriggerItem
     {

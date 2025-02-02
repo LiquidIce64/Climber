@@ -1,6 +1,7 @@
 using Movement;
 using Equipment;
 using UnityEngine;
+using InteractableItems;
 
 namespace Character
 {
@@ -15,6 +16,11 @@ namespace Character
         [SerializeField] private Railgun railgun;
         private BaseEquipment equipped;
         private AudioSource audioSource;
+
+        [SerializeField] private GameObject pauseMenu;
+        private bool paused = false;
+
+        [SerializeField] private GameObject gameOverScreen;
 
         public float Energy { get { return energy; } }
         public float MaxEnergy { get { return maxEnergy; } }
@@ -37,6 +43,9 @@ namespace Character
 
         protected new void Update()
         {
+            // Pause Menu
+            if (Input.GetKeyDown(KeyCode.Escape)) TogglePauseMenu();
+
             // Movement
             _moveData.verticalAxis = Input.GetAxisRaw("Vertical");
             _moveData.horizontalAxis = Input.GetAxisRaw("Horizontal");
@@ -47,19 +56,30 @@ namespace Character
                 _moveData.desiredJump = false;
 
             // Get mouse inputs
-            float mouseX = Input.GetAxisRaw("Mouse X") * inputConfig.sensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * inputConfig.sensY;
-            float mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
-            bool mouse1 = Input.GetMouseButton(0);
+            float mouseX = 0f;
+            float mouseY = 0f;
+            float mouseWheel = 0f;
+            bool mouse1 = false;
+            bool key1 = false;
+            bool key2 = false;
+            if (!paused)
+            {
+                mouseX = Input.GetAxisRaw("Mouse X") * inputConfig.sensX;
+                mouseY = Input.GetAxisRaw("Mouse Y") * inputConfig.sensY;
+                mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
+                mouse1 = Input.GetMouseButton(0);
+                key1 = Input.GetKeyDown(KeyCode.Alpha1);
+                key2 = Input.GetKeyDown(KeyCode.Alpha2);
+            }
 
             // Equipment
-            if (equipped != climbTool && (mouseWheel < 0 || Input.GetKeyDown(KeyCode.Alpha2)))
+            if (equipped != climbTool && (mouseWheel < 0 || key2))
             {
                 equipped.OnUnequipped();
                 climbTool.OnEquipped();
                 equipped = climbTool;
             }
-            else if (equipped != railgun && (mouseWheel > 0 || Input.GetKeyDown(KeyCode.Alpha1)))
+            else if (equipped != railgun && (mouseWheel > 0 || key1))
             {
                 equipped.OnUnequipped();
                 railgun.OnEquipped();
@@ -105,9 +125,10 @@ namespace Character
 
         override protected void OnKilled()
         {
-            // TODO: game over screen
-            health = 0f;
-            Debug.Log("Dead");
+            Instantiate(gameOverScreen, viewTransform.position, viewTransform.rotation);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            base.OnKilled();
         }
 
         public void PlaySound(AudioClip sound)
@@ -122,6 +143,14 @@ namespace Character
             {
                 triggerItem.TriggerAction(this);
             }
+        }
+
+        public void TogglePauseMenu()
+        {
+            paused = !paused;
+            pauseMenu.SetActive(paused);
+            Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = paused;
         }
 
     }

@@ -123,7 +123,7 @@ namespace Character
             base.ApplyDamage(damage - TakeEnergy(damage, true));
         }
 
-        override protected void OnKilled()
+        override public void OnKilled()
         {
             Instantiate(gameOverScreen, viewTransform.position, viewTransform.rotation);
             Cursor.visible = true;

@@ -5,12 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Enemy Test.unity
+  - enabled: 0
+    path: Assets/Scenes/Test Levels/Enemy Test.unity
     guid: 80dc0ab49d52dd44ba5084a4aee7edf6
-  - enabled: 1
-    path: Assets/Scenes/Movement Test.unity
+  - enabled: 0
+    path: Assets/Scenes/Test Levels/Movement Test.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: d9b31ae35efb1c14e9b0f643654de62c
+  - enabled: 1
+    path: Assets/Scenes/Skyhigh.unity
+    guid: 00a173faf201f4a449b1c36205f5330a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

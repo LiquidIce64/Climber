@@ -99,7 +99,7 @@ namespace Character {
             }
         }
 
-        virtual protected void OnKilled()
+        virtual public void OnKilled()
         {
             Destroy(gameObject);
         }

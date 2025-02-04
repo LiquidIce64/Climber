@@ -18541,10 +18541,10 @@ PrefabInstance:
     - target: {fileID: 7941005487913233388, guid: bcdc0f5e17b7313498892de82e1b6d6f, type: 3}
       propertyPath: scene
       value: 
-      objectReference: {fileID: 102900000, guid: 00a173faf201f4a449b1c36205f5330a, type: 3}
+      objectReference: {fileID: 102900000, guid: 2a39b2ed53a79354cb13eaf470c32478, type: 3}
     - target: {fileID: 7941005487913233388, guid: bcdc0f5e17b7313498892de82e1b6d6f, type: 3}
       propertyPath: sceneName
-      value: Skyhigh
+      value: Level 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

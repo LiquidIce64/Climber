@@ -29,9 +29,13 @@ namespace Character
             movementConfig.walkSpeed = patrolSpeed;
 
             // Get path point positions
-            pathPoints = new Vector3[path.transform.childCount];
-            for (int i = 0; i < path.transform.childCount; i++)
-                pathPoints[i] = path.transform.GetChild(i).position;
+            if (path != null)
+            {
+                pathPoints = new Vector3[path.transform.childCount];
+                for (int i = 0; i < path.transform.childCount; i++)
+                    pathPoints[i] = path.transform.GetChild(i).position;
+            }
+            else pathPoints = new Vector3[1] { transform.position };
 
             player = GameObject.FindGameObjectWithTag("Player");
             nav = GetComponent<NavMeshAgent>();

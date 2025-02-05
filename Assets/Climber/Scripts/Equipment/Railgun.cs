@@ -1,4 +1,5 @@
 using Character;
+using Interactables;
 using UnityEngine;
 
 namespace Equipment
@@ -20,8 +21,8 @@ namespace Equipment
             ray.layer = gameObject.layer;
             if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit))
             {
-                if (hit.collider.gameObject.TryGetComponent<BaseCharacter>(out var character))
-                    character.ApplyDamage(damage);
+                if (hit.collider.gameObject.TryGetComponent<IDamageable>(out var damageable))
+                    damageable.ApplyDamage(damage);
 
                 if (hit.distance < 3f)
                 {

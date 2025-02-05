@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 2.unity
     guid: 2a39b2ed53a79354cb13eaf470c32478
   - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+    guid: 601ff4cad4f910449a14582f88cdd889
+  - enabled: 1
     path: Assets/Scenes/Skyhigh.unity
     guid: 00a173faf201f4a449b1c36205f5330a
   m_configObjects:

@@ -1,10 +1,11 @@
+using Interactables;
 using Movement;
 using UnityEngine;
 
 
 namespace Character {
     [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
-    abstract public class BaseCharacter : MonoBehaviour, IMovementControllable
+    abstract public class BaseCharacter : MonoBehaviour, IMovementControllable, IDamageable
     {
         [Header("Physics Settings")]
         public float rigidbodyPushForce = 1f;

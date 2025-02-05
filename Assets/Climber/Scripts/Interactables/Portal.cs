@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace InteractableItems
+namespace Interactables
 {
     public class Portal : MonoBehaviour, ITriggerItem
     {

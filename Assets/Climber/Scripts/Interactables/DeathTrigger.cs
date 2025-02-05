@@ -1,7 +1,7 @@
 using Character;
 using UnityEngine;
 
-namespace InteractableItems
+namespace Interactables
 {
     public class DeathTrigger : MonoBehaviour, ITriggerItem
     {

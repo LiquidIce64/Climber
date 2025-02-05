@@ -1,7 +1,7 @@
 using Movement;
 using Equipment;
 using UnityEngine;
-using InteractableItems;
+using Interactables;
 
 namespace Character
 {

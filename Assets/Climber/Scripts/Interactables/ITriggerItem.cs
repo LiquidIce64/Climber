@@ -1,6 +1,6 @@
 using Character;
 
-namespace InteractableItems
+namespace Interactables
 {
     public interface ITriggerItem
     {

@@ -6,6 +6,6 @@ namespace Interactables
     {
         public UnityEvent ToggleEvent { get; }
 
-        bool IsEnabled { get; }
+        public bool Toggled { get; }
     }
 }

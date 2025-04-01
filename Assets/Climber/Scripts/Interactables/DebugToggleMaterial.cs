@@ -1,48 +1,29 @@
-using Interactables;
 using UnityEngine;
 
-public class DebugToggleMaterial : MonoBehaviour, IToggleable
+namespace Interactables
 {
-    protected bool _toggled = false;
-    [SerializeField] protected GameObject connector;
-    protected IConnector _connector = null;
-    [SerializeField] protected Material onMaterial;
-    [SerializeField] protected Material offMaterial;
-    protected MeshRenderer meshRenderer;
-
-    public bool IsEnabled { get { return _toggled; } }
-
-    protected void OnValidate()
+    public class DebugToggleMaterial : BaseToggleable
     {
-        if (connector != null && !connector.TryGetComponent<IConnector>(out var _))
-            Debug.LogError("Could not get connector component from object");
-    }
+        [SerializeField] protected Material onMaterial;
+        [SerializeField] protected Material offMaterial;
+        protected MeshRenderer meshRenderer;
 
-    protected void Awake()
-    {
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        if (connector != null)
+        public bool IsEnabled { get { return _toggled; } }
+
+        protected new void Awake()
         {
-            connector.TryGetComponent(out _connector);
-            _connector?.ToggleEvent.AddListener(ToggleEventHandler);
+            base.Awake();
+            meshRenderer = gameObject.GetComponent<MeshRenderer>();
         }
-    }
 
-    protected void ToggleEventHandler()
-    {
-        if (_connector.IsEnabled) Enable();
-        else Disable();
-    }
+        override protected void _Enabled()
+        {
+            meshRenderer.material = onMaterial;
+        }
 
-    public void Enable()
-    {
-        _toggled = true;
-        meshRenderer.material = onMaterial;
-    }
-
-    public void Disable()
-    {
-        _toggled = false;
-        meshRenderer.material = offMaterial;
+        override protected void _Disabled()
+        {
+            meshRenderer.material = offMaterial;
+        }
     }
 }

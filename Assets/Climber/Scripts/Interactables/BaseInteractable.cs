@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Interactables
 {
-    abstract public class BaseInteractable: MonoBehaviour
+    abstract public class BaseInteractable: BaseToggleable
     {
         [SerializeField] protected float _energyCost = 0f;
 
@@ -10,6 +10,10 @@ namespace Interactables
         
         public float EnergyCost { get { return _energyCost; } }
 
-        abstract public void OnInteract();
+        public void OnInteract()
+        {
+            if (_toggled) Disable();
+            else Enable();
+        }
     }
 }

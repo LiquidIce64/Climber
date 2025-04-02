@@ -8,20 +8,18 @@ namespace Interactables
         [SerializeField] protected Material offMaterial;
         protected MeshRenderer meshRenderer;
 
-        public bool IsEnabled { get { return _toggled; } }
-
         protected new void Awake()
         {
             base.Awake();
             meshRenderer = gameObject.GetComponent<MeshRenderer>();
         }
 
-        override protected void _Enabled()
+        override protected void Enabled()
         {
             meshRenderer.material = onMaterial;
         }
 
-        override protected void _Disabled()
+        override protected void Disabled()
         {
             meshRenderer.material = offMaterial;
         }

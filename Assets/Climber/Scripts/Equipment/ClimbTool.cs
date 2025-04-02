@@ -49,9 +49,9 @@ namespace Equipment
             if (!Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit, rayDist)) return;
 
             // Hit interactable item
-            if (hit.collider.gameObject.TryGetComponent<BaseInteractable>(out var hitInteractable))
+            if (hit.collider.gameObject.TryGetComponent<IInteractable>(out var hitInteractable))
             {
-                if (!hitInteractable.canInteract) return;
+                if (!hitInteractable.CanInteract) return;
                 if (hitInteractable.EnergyCost > 0f && player.TakeEnergy(hitInteractable.EnergyCost) == 0f) return;
                 
                 hitInteractable.OnInteract();

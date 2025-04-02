@@ -1,23 +1,19 @@
-using UnityEngine.Events;
+using UnityEngine;
 
 namespace Interactables
 {
-    public class Lever : BaseInteractable, IConnector
+    public class Lever : BaseToggleable, IInteractable
     {
-        protected UnityEvent _toggleEvent = new();
+        [SerializeField] protected float _energyCost = 0f;
+        protected bool _canInteract = true;
 
-        public UnityEvent ToggleEvent { get { return _toggleEvent; } }
+        public float EnergyCost => _energyCost;
+        public bool CanInteract => _canInteract;
 
-        public bool Toggled { get { return _toggled; } }
-
-        override protected void _Enabled()
+        public void OnInteract()
         {
-            _toggleEvent.Invoke();
-        }
-
-        override protected void _Disabled()
-        {
-            _toggleEvent.Invoke();
+            if (Toggled) _connector.Disable();
+            else _connector.Enable();
         }
     }
 }

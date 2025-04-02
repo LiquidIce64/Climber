@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3281139005811856546}
+  - component: {fileID: 2390463949778846128}
   - component: {fileID: 679843996243061904}
   - component: {fileID: 5785249684349056576}
   - component: {fileID: 5141009622806967828}
@@ -36,6 +37,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2390463949778846128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5863546744390059242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549460ce533be1a4c9d2a779ebdc0ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _connector: {fileID: 0}
 --- !u!114 &679843996243061904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,9 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b118f4875dae47409e6df5db233b8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connector: {fileID: 0}
+  _connector: {fileID: 2390463949778846128}
   _energyCost: 0
-  canInteract: 1
 --- !u!114 &5785249684349056576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9c0e80f7c0fd74cb19ca0c154e406b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connector: {fileID: 5863546744390059242}
+  _connector: {fileID: 2390463949778846128}
   onMaterial: {fileID: 2100000, guid: 6feadfd1246950145b5d6feb0c49c568, type: 2}
   offMaterial: {fileID: 2100000, guid: 0b424072119075c4595a5a80a021ca38, type: 2}
 --- !u!33 &5141009622806967828

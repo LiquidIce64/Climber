@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5626242596242535398}
+  - component: {fileID: 7089786734092217054}
   - component: {fileID: 4206513468568649406}
   - component: {fileID: 142299016627168745}
   - component: {fileID: 2260848072867640260}
@@ -36,6 +37,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7089786734092217054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462590556315916476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549460ce533be1a4c9d2a779ebdc0ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _connector: {fileID: 0}
 --- !u!114 &4206513468568649406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,9 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c286dbd2d6bd8da4d8c10f624ab945c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connector: {fileID: 0}
+  _connector: {fileID: 7089786734092217054}
   _energyCost: 0
-  canInteract: 1
   timerDuration: 3
 --- !u!114 &142299016627168745
 MonoBehaviour:
@@ -64,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9c0e80f7c0fd74cb19ca0c154e406b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connector: {fileID: 5462590556315916476}
+  _connector: {fileID: 7089786734092217054}
   onMaterial: {fileID: 2100000, guid: 6feadfd1246950145b5d6feb0c49c568, type: 2}
   offMaterial: {fileID: 2100000, guid: 0b424072119075c4595a5a80a021ca38, type: 2}
 --- !u!33 &2260848072867640260

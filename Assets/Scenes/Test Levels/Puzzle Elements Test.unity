@@ -2722,6 +2722,10 @@ PrefabInstance:
       propertyPath: _connector
       value: 
       objectReference: {fileID: 2232986005240044659}
+    - target: {fileID: 5881541496149064260, guid: e6ef392769e40454393c413e88e85d65, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6feadfd1246950145b5d6feb0c49c568, type: 2}
     - target: {fileID: 6661402392177254541, guid: e6ef392769e40454393c413e88e85d65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3133,6 +3137,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 172786203}
     m_Modifications:
+    - target: {fileID: 1745969069144357423, guid: a157d6162f7230446baabce05c09f90c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6feadfd1246950145b5d6feb0c49c568, type: 2}
+    - target: {fileID: 2390463949778846128, guid: a157d6162f7230446baabce05c09f90c, type: 3}
+      propertyPath: _startToggled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3281139005811856546, guid: a157d6162f7230446baabce05c09f90c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.0000014
@@ -3195,6 +3207,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1065532708}
     m_Modifications:
+    - target: {fileID: 2721214222659438265, guid: 30f19fbc7dfcb234ab3c75d35cb5841d, type: 3}
+      propertyPath: _startToggled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4224165712942404898, guid: 30f19fbc7dfcb234ab3c75d35cb5841d, type: 3}
       propertyPath: '_connectorsIn.Array.data[0]'
       value: 
@@ -3315,6 +3331,10 @@ PrefabInstance:
     - target: {fileID: 5626242596242535398, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089786734092217054, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
+      propertyPath: _startToggled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

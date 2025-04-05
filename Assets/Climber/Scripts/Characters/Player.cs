@@ -145,6 +145,14 @@ namespace Character
             }
         }
 
+        protected void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.TryGetComponent<ITriggerVolume>(out var triggerVolume))
+            {
+                triggerVolume.TriggerAction(this);
+            }
+        }
+
         public void TogglePauseMenu()
         {
             paused = !paused;

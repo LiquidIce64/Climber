@@ -10,15 +10,6 @@ namespace Interactables
         [SerializeField] protected Connector[] _connectorsIn;
         [SerializeField] protected Connector _connectorOut;
 
-        protected void OnValidate()
-        {
-            foreach (var connector in _connectorsIn)
-                if (connector == null)
-                {
-                    Debug.LogWarning("Logic gate contains an unassigned input connector field");
-                }
-        }
-
         protected void Awake()
         {
             foreach (var connector in _connectorsIn)

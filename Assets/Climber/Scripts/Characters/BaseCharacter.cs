@@ -52,6 +52,8 @@ namespace Character {
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(transform.position, transform.position + _moveData.velocity * 0.25f);
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, transform.position + _moveData.pushForce * 5f);
         }
 
         protected void Awake()

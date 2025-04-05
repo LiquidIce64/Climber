@@ -8,6 +8,7 @@ namespace Movement
         public Transform viewTransform;
         public Vector3 origin;
         public Vector3 velocity;
+        public Vector3 pushForce = Vector3.zero;
 
         public float slopeLimit = 45f;
         public float surfaceFriction = 1f;

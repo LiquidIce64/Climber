@@ -28,10 +28,15 @@ namespace Movement
                 player.moveData.velocity.y += player.baseVelocity.y * deltaTime;
             }
 
+            // Slide if being pushed
+            if (player.moveData.pushForce.sqrMagnitude > 0f) player.groundObject = null;
+            else CheckForGround();
 
-            CheckForGround();
             CalculateMovementVelocity(deltaTime);
 
+            // Add in push forces
+            player.moveData.velocity += player.moveData.pushForce;
+            player.moveData.pushForce = Vector3.zero;
 
             // Clamp horizontal velocity
             float yVel = player.moveData.velocity.y;

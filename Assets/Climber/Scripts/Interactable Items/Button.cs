@@ -20,7 +20,6 @@ namespace Interactables
         override protected void Enabled()
         {
             _pressed = true;
-
             if (_timer != null) StopCoroutine(_timer);
             _timer = ButtonTimer();
             StartCoroutine(_timer);
@@ -29,7 +28,6 @@ namespace Interactables
         override protected void Disabled()
         {
             _pressed = false;
-
             if (_timer != null) StopCoroutine(_timer);
             _timer = null;
         }

@@ -10,10 +10,6 @@ namespace Interactables
         public float EnergyCost => _energyCost;
         public bool CanInteract => _canInteract;
 
-        public void OnInteract()
-        {
-            if (Toggled) _connector.Disable();
-            else _connector.Enable();
-        }
+        public void OnInteract() => _connector.Toggle();
     }
 }

@@ -43,5 +43,12 @@ namespace Interactables
             _toggled = false;
             _toggleEvent.Invoke();
         }
+
+        [ContextMenu("Toggle")]
+        public void Toggle()
+        {
+            if (_toggled) Disable();
+            else Enable();
+        }
     }
 }

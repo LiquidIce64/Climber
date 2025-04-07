@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using Interactables;
 using UnityEngine;
 
 namespace Movement
@@ -44,8 +44,14 @@ namespace Movement
             player.moveData.velocity = Vector3.ClampMagnitude(player.moveData.velocity, config.maxVelocity);
             player.moveData.velocity.y = yVel;
 
-
-            if (player.moveData.velocity.sqrMagnitude == 0f)
+            Vector3 totalVelocity = player.moveData.velocity;
+            Vector3 objectVelocity = Vector3.zero;
+            if (player.groundObject != null && player.groundObject.TryGetComponent(out MovingObject movingObject))
+            {
+                objectVelocity = movingObject.Velocity;
+                totalVelocity += objectVelocity;
+            }
+            if (totalVelocity.sqrMagnitude == 0f)
             {
                 // Do collisions while standing still
                 MovementPhysics.ResolveCollisions(player.collider, ref player.moveData.origin,
@@ -55,7 +61,7 @@ namespace Movement
             {
                 // Move origin in small steps, checking for collisions
                 float maxStep = 0.2f;
-                Vector3 totalDistVec = player.moveData.velocity * deltaTime;
+                Vector3 totalDistVec = totalVelocity * deltaTime;
                 float totalDist = totalDistVec.magnitude;
                 float distLeft = totalDist;
                 while (distLeft > 0f)
@@ -65,8 +71,10 @@ namespace Movement
                     player.moveData.origin += totalDistVec * (step / totalDist);
 
                     MovementPhysics.ResolveCollisions(player.collider, ref player.moveData.origin,
-                        ref player.moveData.velocity,player.moveData.rigidbodyPushForce, step / totalDist);
+                        ref totalVelocity, player.moveData.rigidbodyPushForce, step / totalDist);
                 }
+                // Update player velocity
+                player.moveData.velocity = totalVelocity - objectVelocity;
             }
 
         }
@@ -83,10 +91,9 @@ namespace Movement
             if (trace.hitCollider == null && player.groundObject != null)
             { // Just stepped off an edge
                 Vector3 rayOrigin = player.moveData.origin;
-                rayOrigin.y -= player.collider.bounds.extents.y;
 
                 // Check if there's ground directly below
-                if (Physics.Raycast(rayOrigin,Vector3.down, out var hit, 0.5f, MovementPhysics.groundLayerMask))
+                if (Physics.Raycast(rayOrigin,Vector3.down, out var hit, player.collider.bounds.extents.y + 0.5f, MovementPhysics.groundLayerMask))
                 {
                     trace.hitCollider = hit.collider;
                     trace.planeNormal = hit.normal;
@@ -95,15 +102,30 @@ namespace Movement
 
             float groundSlope = Vector3.Angle(Vector3.up, trace.planeNormal);
             float velAwayFromGround = Vector3.Dot(player.moveData.velocity, trace.planeNormal);
+            MovingObject movingObject;
 
             if (trace.hitCollider == null || groundSlope > player.moveData.slopeLimit || jumping && velAwayFromGround > 0.25f)
             {
+                // Apply moving object's velocity when stepping off
+                if (player.groundObject != null && player.groundObject.TryGetComponent(out movingObject))
+                    player.moveData.velocity += movingObject.Velocity;
+
                 player.groundObject = null;
                 return false;
             }
             jumping = false;
             groundNormal = trace.planeNormal;
+            GameObject lastGroundObject = player.groundObject;
             player.groundObject = trace.hitCollider.gameObject;
+
+            // If stepping on a new moving object, set velocity relative to it
+            if (
+                player.groundObject != null &&
+                player.groundObject != lastGroundObject &&
+                player.groundObject.TryGetComponent(out movingObject)
+            ) player.moveData.velocity -= movingObject.Velocity;
+
+            // Clamp player to ground
             player.moveData.velocity -= velAwayFromGround * groundNormal;
             return true;
         }
@@ -133,7 +155,7 @@ namespace Movement
                     );
 
                 // Reflect off of surfaces, remembering change in velocity to calculate a collision vector
-                var initVel = player.moveData.velocity;
+                //var initVel = player.moveData.velocity;
                 MovementPhysics.Reflect(
                     ref player.moveData.velocity,
                     player.collider,
@@ -141,7 +163,7 @@ namespace Movement
                     deltaTime,
                     config.overbounce
                 );
-                var collisionVector = initVel - player.moveData.velocity;
+                // var collisionVector = initVel - player.moveData.velocity;
                 // TODO: using energy / taking damage proportional to collision vector
 
             }

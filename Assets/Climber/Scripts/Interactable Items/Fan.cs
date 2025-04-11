@@ -2,12 +2,14 @@ using Character;
 using Movement;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Interactables
 {
     [RequireComponent(typeof (BoxCollider))]
     public class Fan : BaseToggleable, ITriggerVolume
     {
+        [SerializeField] protected Connector _reverseConnector;
         [SerializeField] protected bool _reversed = false;
         [SerializeField] protected float _pushRange = 12f;
         [SerializeField] protected float _pushStrength = 20f;
@@ -15,9 +17,17 @@ namespace Interactables
 
         public bool Reversed => _reversed;
 
+        [ContextMenu("Reverse")]
+        protected void Reverse()
+        {
+            _reversed = !_reversed;
+        }
+
         protected new void Awake()
         {
             base.Awake();
+            if (_reverseConnector != null)
+                _reverseConnector.ToggleEvent.AddListener(Reverse);
             _pushVolume = GetComponent<BoxCollider>();
         }
 

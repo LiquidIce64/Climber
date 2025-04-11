@@ -37,7 +37,8 @@ namespace Interactables
         protected new void Awake()
         {
             base.Awake();
-            _reverseConnector.ToggleEvent.AddListener(Reverse);
+            if (_reverseConnector != null)
+                _reverseConnector.ToggleEvent.AddListener(Reverse);
             for (int i = 0; i < _pathPoints.Length; i++)
                 _pathPoints[i] += transform.position;
             _target = _pathPoints[0];

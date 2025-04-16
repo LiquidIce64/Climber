@@ -1,5 +1,6 @@
 using Character;
 using Interactables;
+using Visuals;
 using UnityEngine;
 
 namespace Equipment

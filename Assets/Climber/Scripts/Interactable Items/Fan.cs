@@ -1,8 +1,6 @@
 using Character;
-using Movement;
-using Unity.VisualScripting;
+using Visuals;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Interactables
 {
@@ -13,6 +11,7 @@ namespace Interactables
         [SerializeField] protected bool _reversed = false;
         [SerializeField] protected float _pushRange = 12f;
         [SerializeField] protected float _pushStrength = 20f;
+        [SerializeField] protected FanBlades _blades;
         protected BoxCollider _pushVolume;
 
         public bool Reversed => _reversed;
@@ -21,6 +20,7 @@ namespace Interactables
         protected void Reverse()
         {
             _reversed = !_reversed;
+            _blades.UpdateVelocity(this);
         }
 
         protected new void Awake()
@@ -42,11 +42,13 @@ namespace Interactables
         protected override void Enabled()
         {
             _pushVolume.enabled = true;
+            _blades.UpdateVelocity(this);
         }
 
         protected override void Disabled()
         {
             _pushVolume.enabled = false;
+            _blades.UpdateVelocity(this);
         }
 
         public void TriggerAction(Player player)

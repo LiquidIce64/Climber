@@ -12,6 +12,7 @@ namespace Interactables
         [SerializeField] protected float _pushRange = 12f;
         [SerializeField] protected float _pushStrength = 20f;
         [SerializeField] protected FanBlades _blades;
+        [SerializeField] protected ToggleMaterial _indicators;
         protected BoxCollider _pushVolume;
 
         public bool Reversed => _reversed;
@@ -21,6 +22,7 @@ namespace Interactables
         {
             _reversed = !_reversed;
             _blades.UpdateVelocity(this);
+            _indicators.UpdateMaterial(Toggled, _reversed);
         }
 
         protected new void Awake()
@@ -37,18 +39,22 @@ namespace Interactables
             _pushVolume.isTrigger = true;
             _pushVolume.center = new Vector3(0, _pushRange / 2, 0);
             _pushVolume.size = new Vector3(4, _pushRange, 4);
+
+            _indicators.UpdateMaterialInEditor(true, _reversed);
         }
 
         protected override void Enabled()
         {
             _pushVolume.enabled = true;
             _blades.UpdateVelocity(this);
+            _indicators.UpdateMaterial(Toggled, _reversed);
         }
 
         protected override void Disabled()
         {
             _pushVolume.enabled = false;
             _blades.UpdateVelocity(this);
+            _indicators.UpdateMaterial(Toggled, _reversed);
         }
 
         public void TriggerAction(Player player)

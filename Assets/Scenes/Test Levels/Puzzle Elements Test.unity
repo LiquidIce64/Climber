@@ -3146,6 +3146,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+      propertyPath: _reversed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: _connector
       value: 
       objectReference: {fileID: 2086626852}
@@ -4497,6 +4501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Deadly fan
       objectReference: {fileID: 0}
+    - target: {fileID: 6022877023436181039, guid: ceae5f00a82bb6a4cb6756d6ecc44c4a, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6feadfd1246950145b5d6feb0c49c568, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

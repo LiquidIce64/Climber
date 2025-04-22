@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3008047286439527394, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6feadfd1246950145b5d6feb0c49c568, type: 2}
     - target: {fileID: 3104291590254800764, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: m_Name
       value: Deadly fan
@@ -52,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+      propertyPath: _reversed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7910157296068992768, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: m_Size.y
       value: 0.8
@@ -67,24 +75,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1413960007608255289, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+    - {fileID: 5396937813834253358, guid: 4216a1853fce4774c90a57c155006751, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5886542842072181125, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 633759586875813522, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 2097315498645698356}
+      addedObject: {fileID: 3787364278018246076}
   m_SourcePrefab: {fileID: 100100000, guid: 4216a1853fce4774c90a57c155006751, type: 3}
---- !u!1 &3141830463289320520 stripped
+--- !u!1 &8277797892563133279 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 5886542842072181125, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+  m_CorrespondingSourceObject: {fileID: 633759586875813522, guid: 4216a1853fce4774c90a57c155006751, type: 3}
   m_PrefabInstance: {fileID: 8803188925918662093}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2097315498645698356
+--- !u!114 &3787364278018246076
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3141830463289320520}
+  m_GameObject: {fileID: 8277797892563133279}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0aa9de6a4501c6e4cbf193cac8aa7e9b, type: 3}

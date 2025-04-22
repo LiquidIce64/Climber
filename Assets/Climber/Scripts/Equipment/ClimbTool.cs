@@ -59,20 +59,20 @@ namespace Equipment
                 OnHit(hit);
                 return;
             }
-
-            // TODO: make only certain walls climbable
-            // Hit a wall
-
-            // If already moving upwards fast, no reason to climb
-            if (character.moveData.velocity.y >= character.moveConfig.climbVelocity) return;
-
-            float a = Vector3.Angle(hit.normal, Vector3.up);
-            if (minWallAngle <= a && a <= 180f - minWallAngle)
+            
+            // Hit climbable wall
+            if (hit.collider.gameObject.TryGetComponent<ClimbableWall>(out var hitWall))
             {
-                if (player != null && player.TakeEnergy(energyConsumption) == 0f) return;
-                character.moveData.desiredClimb = true;
+                if (!hitWall.Toggled) return;
 
+                // If already moving upwards fast, no reason to climb
+                if (character.moveData.velocity.y >= character.moveConfig.climbVelocity) return;
+
+                if (player.TakeEnergy(energyConsumption) == 0f) return;
+
+                character.moveData.desiredClimb = true;
                 OnHit(hit);
+                return;
             }
         }
 

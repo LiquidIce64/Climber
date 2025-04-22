@@ -39,8 +39,10 @@ namespace Interactables
             base.Awake();
             if (_reverseConnector != null)
                 _reverseConnector.ToggleEvent.AddListener(Reverse);
+
+            Matrix4x4 mat = transform.localToWorldMatrix;
             for (int i = 0; i < _pathPoints.Length; i++)
-                _pathPoints[i] += transform.position;
+                _pathPoints[i] = mat.MultiplyPoint(_pathPoints[i]);
             _target = _pathPoints[0];
         }
 

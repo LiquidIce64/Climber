@@ -5,8 +5,7 @@ namespace Interactables
 {
     public class Connector: MonoBehaviour
     {
-        [SerializeField] protected bool _startToggled = false;
-        protected bool _toggled = false;
+        [SerializeField] protected bool _toggled = false;
         protected UnityEvent _toggleEvent = new();
         [SerializeField] protected Connector _connector;
 
@@ -21,7 +20,7 @@ namespace Interactables
 
         protected void Start()
         {
-            if (_startToggled) Enable();
+            _toggleEvent.Invoke();
         }
 
         protected void ToggleEventHandler()

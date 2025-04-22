@@ -10,7 +10,8 @@ namespace Interactables
 
         protected void Awake()
         {
-            _connector.ToggleEvent.AddListener(ToggleEventHandler);
+            if (_connector != null)
+                _connector.ToggleEvent.AddListener(ToggleEventHandler);
         }
 
         protected void ToggleEventHandler()

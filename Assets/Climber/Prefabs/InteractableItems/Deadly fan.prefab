@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6feadfd1246950145b5d6feb0c49c568, type: 2}
     - target: {fileID: 3104291590254800764, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: m_Name
-      value: Deadly fan
+      value: Deadly Fan
       objectReference: {fileID: 0}
     - target: {fileID: 5210850180069343184, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: m_LocalPosition.x

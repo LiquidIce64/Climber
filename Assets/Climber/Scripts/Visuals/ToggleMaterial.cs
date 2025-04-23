@@ -1,13 +1,12 @@
 using UnityEngine;
+using Utils;
 
 namespace Visuals
 {
     [RequireComponent (typeof (MeshRenderer))]
     public class ToggleMaterial : MonoBehaviour
     {
-        [SerializeField] protected Material _reverseMaterial;
-        [SerializeField] protected Material _onMaterial;
-        [SerializeField] protected Material _offMaterial;
+        [SerializeField] MaterialArray _materialArray;
         [SerializeField] protected int _materialIndex;
         protected MeshRenderer _meshRenderer;
 
@@ -22,13 +21,15 @@ namespace Visuals
             _meshRenderer = GetComponent<MeshRenderer>();
         }
 
+        protected Material GetMaterial(bool toggled, bool reversed)
+        {
+            return _materialArray.Materials[toggled ? (reversed ? 2 : 1) : 0];
+        }
+
         public void UpdateMaterial(bool toggled, bool reversed = false)
         {
             var materials = _meshRenderer.materials;
-            materials[_materialIndex] =
-                toggled ? (
-                    reversed ? _reverseMaterial : _onMaterial
-                ) : _offMaterial;
+            materials[_materialIndex] = GetMaterial(toggled, reversed);
             _meshRenderer.materials = materials;
         }
 
@@ -36,10 +37,7 @@ namespace Visuals
         {
             _meshRenderer = GetComponent<MeshRenderer>();
             var materials = _meshRenderer.sharedMaterials;
-            materials[_materialIndex] =
-                toggled ? (
-                    reversed ? _reverseMaterial : _onMaterial
-                ) : _offMaterial;
+            materials[_materialIndex] = GetMaterial(toggled, reversed);
             _meshRenderer.materials = materials;
         }
     }

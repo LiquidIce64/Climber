@@ -2,6 +2,7 @@ using Character;
 using Interactables;
 using Visuals;
 using UnityEngine;
+using Utils;
 
 namespace Equipment
 {
@@ -9,14 +10,29 @@ namespace Equipment
     {
         public float rayDist = 2f;
         [Range(60f, 90f)] public float minWallAngle = 75f;
+        [SerializeField] protected EnergyColor _color = EnergyColor.Blue;
+        [SerializeField] protected EnergyMaterial[] energyMaterials;
         [SerializeField] protected Transform[] rayOrigins;
         [SerializeField] protected GameObject energyRay;
         [SerializeField] protected GameObject sparkParticles;
+
+        protected void OnValidate()
+        {
+            foreach (var mat in energyMaterials)
+                mat.UpdateMaterialInEditor(_color);
+        }
 
         protected new void Awake()
         {
             base.Awake();
             player = (Player)character;
+        }
+
+        public void SetColor(EnergyColor color)
+        {
+            _color = color;
+            foreach (var mat in energyMaterials)
+                mat.UpdateMaterial(_color);
         }
 
         protected void OnHit(RaycastHit hit)
@@ -64,6 +80,7 @@ namespace Equipment
             if (hit.collider.gameObject.TryGetComponent<ClimbableWall>(out var hitWall))
             {
                 if (!hitWall.Toggled) return;
+                if (hitWall.Color != _color) return;
 
                 // If already moving upwards fast, no reason to climb
                 if (character.moveData.velocity.y >= character.moveConfig.climbVelocity) return;

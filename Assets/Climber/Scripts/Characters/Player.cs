@@ -2,6 +2,7 @@ using Movement;
 using Equipment;
 using UnityEngine;
 using Interactables;
+using Utils;
 
 namespace Character
 {
@@ -93,6 +94,8 @@ namespace Character
 
             base.Update();
         }
+
+        public void SetClimbToolColor(EnergyColor color) => climbTool.SetColor(color);
 
         public float AddEnergy(float amount)
         {

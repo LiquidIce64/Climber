@@ -15,6 +15,7 @@ namespace Equipment
         [SerializeField] protected Transform[] rayOrigins;
         [SerializeField] protected GameObject energyRay;
         [SerializeField] protected GameObject sparkParticles;
+        [SerializeField] protected MaterialArray particleMaterials;
 
         protected void OnValidate()
         {
@@ -37,6 +38,8 @@ namespace Equipment
 
         protected void OnHit(RaycastHit hit)
         {
+            var material = EnergyMaterial.GetMaterial(particleMaterials, _color);
+
             // Create rays
             foreach (Transform origin in rayOrigins)
             {
@@ -46,12 +49,13 @@ namespace Equipment
                 ray.transform.SetPositionAndRotation(origin.position, Quaternion.LookRotation(rayVec.normalized));
                 ray.transform.localScale = new Vector3(1f, 1f, rayVec.magnitude);
                 var rayComp = ray.GetComponent<EnergyRay>();
-                rayComp.duration /= 2f;
                 rayComp.start_width *= origin.localScale.x;
+                ray.GetComponent<LineRenderer>().material = material;
             }
 
             var particles = Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
             particles.layer = gameObject.layer;
+            particles.GetComponent<ParticleSystemRenderer>().material = material;
 
             audioSource.Play();
 

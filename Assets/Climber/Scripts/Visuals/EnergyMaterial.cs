@@ -20,15 +20,15 @@ namespace Visuals
             _meshRenderer = GetComponent<MeshRenderer>();
         }
 
-        protected Material GetMaterial(EnergyColor color)
+        static public Material GetMaterial(MaterialArray materialArray, EnergyColor color)
         {
-            return _materialArray.Materials[(int)color + 1];
+            return materialArray.Materials[(int)color + 1];
         }
 
         public void UpdateMaterial(EnergyColor color)
         {
             var materials = _meshRenderer.materials;
-            materials[_materialIndex] = GetMaterial(color);
+            materials[_materialIndex] = GetMaterial(_materialArray, color);
             _meshRenderer.materials = materials;
         }
 
@@ -36,7 +36,7 @@ namespace Visuals
         {
             _meshRenderer = GetComponent<MeshRenderer>();
             var materials = _meshRenderer.sharedMaterials;
-            materials[_materialIndex] = GetMaterial(color);
+            materials[_materialIndex] = GetMaterial(_materialArray, color);
             _meshRenderer.materials = materials;
         }
     }

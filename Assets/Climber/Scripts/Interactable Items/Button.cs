@@ -3,13 +3,17 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Button : Lever
+    public class Button : BaseToggleable, IInteractable
     {
+        [SerializeField] protected float _energyCost = 0f;
         [SerializeField] protected float timerDuration = 3f;
         protected IEnumerator _timer;
         protected bool _pressed = false;
 
-        public new bool CanInteract => _canInteract && !_pressed;
+        public float EnergyCost => _energyCost;
+        public bool CanInteract => !_pressed;
+
+        public void OnInteract() => _connector.Toggle();
 
         protected IEnumerator ButtonTimer()
         {

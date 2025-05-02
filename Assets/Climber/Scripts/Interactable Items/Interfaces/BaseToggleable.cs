@@ -6,7 +6,7 @@ namespace Interactables
     {
         [SerializeField] protected Connector _connector;
 
-        public bool Toggled => _connector.Toggled;
+        public bool Toggled => (_connector == null) || _connector.Toggled;
 
         protected void Awake()
         {
@@ -14,9 +14,14 @@ namespace Interactables
                 _connector.ToggleEvent.AddListener(ToggleEventHandler);
         }
 
+        virtual protected void Start()
+        {
+            ToggleEventHandler();
+        }
+
         protected void ToggleEventHandler()
         {
-            if (_connector.Toggled) Enabled();
+            if (Toggled) Enabled();
             else Disabled();
         }
 

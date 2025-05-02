@@ -18,11 +18,6 @@ namespace Interactables
                 _connector.ToggleEvent.AddListener(ToggleEventHandler);
         }
 
-        protected void Start()
-        {
-            _toggleEvent.Invoke();
-        }
-
         protected void ToggleEventHandler()
         {
             if (_connector.Toggled) Enable();

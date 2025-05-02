@@ -69,8 +69,13 @@ namespace Equipment
             // Skip if nothing was hit
             if (!Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit, rayDist)) return;
 
+            GameObject obj = hit.collider.gameObject;
+            // If hit a linked collider, use its parent object instead
+            if (obj.TryGetComponent(out LinkedCollider collider))
+                obj = collider.ParentObject;
+
             // Hit interactable item
-            if (hit.collider.gameObject.TryGetComponent<IInteractable>(out var hitInteractable))
+            if (obj.TryGetComponent(out IInteractable hitInteractable))
             {
                 if (!hitInteractable.CanInteract) return;
                 if (hitInteractable.EnergyCost > 0f && player.TakeEnergy(hitInteractable.EnergyCost) == 0f) return;
@@ -81,7 +86,7 @@ namespace Equipment
             }
             
             // Hit climbable wall
-            if (hit.collider.gameObject.TryGetComponent<ClimbableWall>(out var hitWall))
+            if (obj.TryGetComponent(out ClimbableWall hitWall))
             {
                 if (!hitWall.Toggled) return;
                 if (hitWall.Color != _color) return;

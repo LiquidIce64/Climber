@@ -5046,6 +5046,14 @@ PrefabInstance:
       propertyPath: _pushStrength
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 2606328551499681245, guid: ceae5f00a82bb6a4cb6756d6ecc44c4a, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: -14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2606328551499681245, guid: ceae5f00a82bb6a4cb6756d6ecc44c4a, type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 2928242514538747473, guid: ceae5f00a82bb6a4cb6756d6ecc44c4a, type: 3}
       propertyPath: m_Size.y
       value: 14

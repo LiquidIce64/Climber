@@ -1,10 +1,11 @@
 using Character;
 using Visuals;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 namespace Interactables
 {
-    [RequireComponent(typeof (BoxCollider))]
+    [RequireComponent(typeof (BoxCollider), typeof(ParticleSystem))]
     public class Fan : BaseToggleable, ITriggerVolume
     {
         [SerializeField] protected Connector _reverseConnector;
@@ -14,6 +15,8 @@ namespace Interactables
         [SerializeField] protected FanBlades _blades;
         [SerializeField] protected ToggleMaterial _indicators;
         protected BoxCollider _pushVolume;
+        protected ParticleSystem.EmissionModule _windEmitter;
+        protected ParticleSystem.ShapeModule _windShape;
 
         public bool Reversed => _reversed;
 
@@ -23,6 +26,21 @@ namespace Interactables
             _reversed = !_reversed;
             _blades.UpdateVelocity(this);
             _indicators.UpdateMaterial(Toggled, _reversed);
+            UpdateWindShape();
+        }
+
+        protected void UpdateWindShape()
+        {
+            if (_reversed)
+            {
+                _windShape.position = new Vector3(0f, _pushRange, 0f);
+                _windShape.scale = new Vector3(1f, 1f, -_pushRange);
+            }
+            else
+            {
+                _windShape.position = new Vector3(0f, 0f, 0f);
+                _windShape.scale = new Vector3(1f, 1f, _pushRange);
+            }
         }
 
         protected new void Awake()
@@ -31,6 +49,10 @@ namespace Interactables
             if (_reverseConnector != null)
                 _reverseConnector.ToggleEvent.AddListener(Reverse);
             _pushVolume = GetComponent<BoxCollider>();
+
+            var wind = GetComponent<ParticleSystem>();
+            _windEmitter = wind.emission;
+            _windShape = wind.shape;
         }
 
         protected void OnValidate()
@@ -41,6 +63,11 @@ namespace Interactables
             _pushVolume.size = new Vector3(4, _pushRange, 4);
 
             _indicators.UpdateMaterialInEditor(true, _reversed);
+
+            var wind = GetComponent<ParticleSystem>();
+            _windEmitter = wind.emission;
+            _windShape = wind.shape;
+            UpdateWindShape();
         }
 
         protected override void Enabled()
@@ -48,6 +75,7 @@ namespace Interactables
             _pushVolume.enabled = true;
             _blades.UpdateVelocity(this);
             _indicators.UpdateMaterial(Toggled, _reversed);
+            _windEmitter.enabled = true;
         }
 
         protected override void Disabled()
@@ -55,6 +83,7 @@ namespace Interactables
             _pushVolume.enabled = false;
             _blades.UpdateVelocity(this);
             _indicators.UpdateMaterial(Toggled, _reversed);
+            _windEmitter.enabled = false;
         }
 
         public void TriggerAction(Player player)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2721214222659438265}
   - component: {fileID: 4224165712942404898}
   m_Layer: 0
-  m_Name: LogicGate
+  m_Name: Logic Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

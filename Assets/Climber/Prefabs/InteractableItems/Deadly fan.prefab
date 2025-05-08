@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6feadfd1246950145b5d6feb0c49c568, type: 2}
     - target: {fileID: 3104291590254800764, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: m_Name
-      value: Deadly Fan
+      value: Deadly fan
       objectReference: {fileID: 0}
     - target: {fileID: 5210850180069343184, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,6 +55,14 @@ PrefabInstance:
     - target: {fileID: 5210850180069343184, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773624593275944976, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773624593275944976, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: _reversed

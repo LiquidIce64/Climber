@@ -3,6 +3,7 @@ using Equipment;
 using UnityEngine;
 using Interactables;
 using Utils;
+using UnityEngine.Audio;
 
 namespace Character
 {
@@ -23,6 +24,8 @@ namespace Character
 
         [SerializeField] private GameObject gameOverScreen;
 
+        [SerializeField] private AudioMixer masterVolume;
+
         public float Energy { get { return energy; } }
         public float MaxEnergy { get { return maxEnergy; } }
 
@@ -40,6 +43,11 @@ namespace Character
             // Hide cursor
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+
+        protected void Start()
+        {
+            masterVolume.SetFloat("Volume", Mathf.Log10(PlayerPrefs.GetFloat("Volume", 0.25f)) * 20);
         }
 
         protected new void Update()

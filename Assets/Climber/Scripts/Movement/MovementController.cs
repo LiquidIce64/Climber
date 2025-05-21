@@ -174,6 +174,8 @@ namespace Movement
 
                 player.moveData.velocity.y = config.jumpVelocity;
                 jumping = true;
+
+                player.jumpSound.Play();
             }
             else
             {   // Ground movement

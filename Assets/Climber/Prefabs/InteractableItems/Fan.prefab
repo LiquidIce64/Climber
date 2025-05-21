@@ -52,7 +52,7 @@ MonoBehaviour:
   _reverseConnector: {fileID: 0}
   _reversed: 0
   _pushRange: 12
-  _pushStrength: 20
+  _pushStrength: 60
   _blades: {fileID: 4907757947920420808}
   _indicators: {fileID: 418254442602186319}
 --- !u!65 &5947004006869998492

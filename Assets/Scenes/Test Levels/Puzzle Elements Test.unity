@@ -5786,7 +5786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2028859558102334356, guid: ceae5f00a82bb6a4cb6756d6ecc44c4a, type: 3}
       propertyPath: _pushStrength
-      value: 30
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2606328551499681245, guid: ceae5f00a82bb6a4cb6756d6ecc44c4a, type: 3}
       propertyPath: ShapeModule.m_Scale.z

@@ -1243,10 +1243,6 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
-      propertyPath: _pushStrength
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: _reverseConnector
       value: 
       objectReference: {fileID: 519961386}
@@ -5419,7 +5415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: _pushStrength
-      value: 80
+      value: 240
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

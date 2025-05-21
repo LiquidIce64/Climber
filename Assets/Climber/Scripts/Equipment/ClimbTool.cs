@@ -16,6 +16,8 @@ namespace Equipment
         [SerializeField] protected GameObject energyRay;
         [SerializeField] protected GameObject sparkParticles;
         [SerializeField] protected MaterialArray particleMaterials;
+        protected AudioSource reloadSound;
+        [SerializeField] protected float reloadSoundOffset = 1f;
 
         protected void OnValidate()
         {
@@ -27,6 +29,7 @@ namespace Equipment
         {
             base.Awake();
             player = (Player)character;
+            reloadSound = GetComponent<AudioSource>();
         }
 
         public void SetColor(EnergyColor color)
@@ -58,6 +61,9 @@ namespace Equipment
             particles.GetComponent<ParticleSystemRenderer>().material = material;
 
             audioSource.Play();
+
+            if (cooldown > 0f)
+                reloadSound.PlayDelayed(cooldown - reloadSoundOffset);
 
             lastUsed = Time.time;
         }

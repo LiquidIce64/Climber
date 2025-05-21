@@ -4747,6 +4747,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6773624593275944976, guid: 4216a1853fce4774c90a57c155006751, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: _connector
       value: 
@@ -4757,7 +4761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7353464132794889817, guid: 4216a1853fce4774c90a57c155006751, type: 3}
       propertyPath: _pushStrength
-      value: 16
+      value: 48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

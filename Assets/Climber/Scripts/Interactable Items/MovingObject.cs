@@ -15,6 +15,7 @@ namespace Interactables
         protected int _pathIndex = 0;
         protected Vector3 _target;
         protected Vector3 _velocity = Vector3.zero;
+        protected AudioLoopController moveSound;
 
         public Vector3 Velocity => _velocity;
 
@@ -39,6 +40,7 @@ namespace Interactables
             base.Awake();
             if (_reverseConnector != null)
                 _reverseConnector.ToggleEvent.AddListener(Reverse);
+            moveSound = GetComponent<AudioLoopController>();
 
             Matrix4x4 mat = transform.localToWorldMatrix;
             for (int i = 0; i < _pathPoints.Length; i++)
@@ -61,6 +63,9 @@ namespace Interactables
             _velocity = step / Time.deltaTime;
 
             if (transform.position == _target) UpdateTarget();
+
+            if (step.sqrMagnitude > 0f) moveSound.Play();
+            else moveSound.Stop();
         }
 
         protected void UpdateTarget()
@@ -84,6 +89,7 @@ namespace Interactables
         protected override void Disabled()
         {
             _velocity = Vector3.zero;
+            moveSound.Stop();
         }
     }
 }

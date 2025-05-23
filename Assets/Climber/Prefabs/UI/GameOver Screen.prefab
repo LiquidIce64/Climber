@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1648666818560338861}
   - component: {fileID: 5862827095205915479}
   - component: {fileID: 4169035705594686570}
+  - component: {fileID: 5739909084483758567}
   m_Layer: 5
   m_Name: GameOver Menu
   m_TagString: Untagged
@@ -120,6 +121,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe2b1f5b5b4dfd4aa3c124c61ef7129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5739909084483758567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512271784495950534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b022af795acd19409ee0cd342212862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - key: 114
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4169035705594686570}
+          m_TargetAssemblyTypeName: UI.PauseMenu, Assembly-CSharp
+          m_MethodName: RestartLevel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3701853840570459333
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,9 +712,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2291941046633793775, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
       propertyPath: m_text
-      value: 'Restart Level
-
-'
+      value: <u>R</u>estart Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291941046633793775, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291941046633793775, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 2291941046633793775, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
       propertyPath: m_HorizontalAlignment

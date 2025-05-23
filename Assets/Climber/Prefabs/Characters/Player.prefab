@@ -124,9 +124,6 @@ MonoBehaviour:
     deceleration: 10
     groundCheckDistance: 0.05
   _jumpSound: {fileID: 1981646479470546758}
-  inputConfig:
-    sensX: 1
-    sensY: 1
   maxEnergy: 1000
   climbTool: {fileID: 85068515994518522}
   railgun: {fileID: 4699225928300332494}
@@ -1206,6 +1203,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3289688387773240736}
     m_Modifications:
+    - target: {fileID: 2494199836092928306, guid: de6bdc4865e5b7445bc344315718021f, type: 3}
+      propertyPath: listener
+      value: 
+      objectReference: {fileID: 3962133064200523501}
     - target: {fileID: 6818072837009465661, guid: de6bdc4865e5b7445bc344315718021f, type: 3}
       propertyPath: m_Name
       value: Pause Menu

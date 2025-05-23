@@ -9,8 +9,6 @@ namespace Character
 {
     public class Player : BaseCharacter
     {
-        public InputConfig inputConfig;
-
         [SerializeField] protected float maxEnergy = 100f;
         protected float energy;
 
@@ -73,8 +71,9 @@ namespace Character
             bool key2 = false;
             if (!paused)
             {
-                mouseX = Input.GetAxisRaw("Mouse X") * inputConfig.sensX;
-                mouseY = Input.GetAxisRaw("Mouse Y") * inputConfig.sensY;
+                float sensitivity = UserSettings.Sensitivity;
+                mouseX = Input.GetAxisRaw("Mouse X") * sensitivity;
+                mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity;
                 mouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
                 mouse1 = Input.GetMouseButton(0);
                 key1 = Input.GetKeyDown(KeyCode.Alpha1);

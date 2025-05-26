@@ -113,6 +113,7 @@ MonoBehaviour:
     gravity: 20
     jumpVelocity: 7
     climbVelocity: 18
+    lateJumpTime: 0.2
     friction: 6
     maxVelocity: 50
     slopeLimit: 45

@@ -112,6 +112,7 @@ MonoBehaviour:
     gravity: 20
     jumpVelocity: 7
     climbVelocity: 20
+    lateJumpTime: 0.2
     friction: 6
     maxVelocity: 50
     slopeLimit: 45
@@ -122,6 +123,7 @@ MonoBehaviour:
     acceleration: 100
     deceleration: 10
     groundCheckDistance: 0.05
+  _jumpSound: {fileID: 0}
   path: {fileID: 0}
   patrolSpeed: 4
   maxChaseDistance: 20

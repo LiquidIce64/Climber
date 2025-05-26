@@ -12,6 +12,7 @@ namespace Movement
         public float gravity = 20f;
         public float jumpVelocity = 6.5f;
         public float climbVelocity = 10f;
+        public float lateJumpTime = 0.2f;
 
         [Header("General physics")]
         public float friction = 6f;

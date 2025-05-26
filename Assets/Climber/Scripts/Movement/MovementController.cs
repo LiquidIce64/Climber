@@ -11,6 +11,7 @@ namespace Movement
         private MovementConfig config;
 
         public bool jumping = false;
+        private float lateJumpTimer = 0f;
 
         Vector3 groundNormal = Vector3.up;
 
@@ -131,6 +132,15 @@ namespace Movement
             return true;
         }
 
+        private void Jump()
+        {
+            if (!config.autoBhop) player.moveData.desiredJump = false;
+            player.moveData.velocity.y = config.jumpVelocity;
+            jumping = true;
+            lateJumpTimer = config.lateJumpTime * 2;
+            player.jumpSound.Play();
+        }
+
         private void CalculateMovementVelocity(float deltaTime)
         {
             if (player.moveData.desiredClimb)
@@ -143,6 +153,14 @@ namespace Movement
 
             if (player.groundObject == null)
             {   // Air movement
+                lateJumpTimer += deltaTime;
+
+                if (player.moveData.desiredJump && lateJumpTimer <= config.lateJumpTime)
+                {
+                    Jump();
+                    return;
+                }
+
                 Vector3 moveVector = Vector3.ClampMagnitude(
                     player.moveData.verticalAxis * playerTransform.forward + player.moveData.horizontalAxis * playerTransform.right, 1f);
 
@@ -168,18 +186,16 @@ namespace Movement
                 // TODO: using energy / taking damage proportional to collision vector
 
             }
-            else if (player.moveData.desiredJump)
-            {   // Jump
-                if (!config.autoBhop) player.moveData.desiredJump = false;
-
-                player.moveData.velocity.y = config.jumpVelocity;
-                jumping = true;
-
-                player.jumpSound.Play();
-            }
             else
             {   // Ground movement
+                lateJumpTimer = 0f;
 
+                if (player.moveData.desiredJump)
+                {
+                    Jump();
+                    return;
+                }
+                
                 // Use horizontal velocity
                 player.moveData.velocity.y = 0f;
 

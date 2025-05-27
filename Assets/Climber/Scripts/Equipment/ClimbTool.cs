@@ -3,16 +3,23 @@ using Interactables;
 using Visuals;
 using UnityEngine;
 using Utils;
+using System;
 
 namespace Equipment
 {
     public class ClimbTool : BaseEquipment
     {
+        [Serializable]
+        protected struct RayOrigin {
+            public Transform transform;
+            public bool useColor;
+        }
+
         public float rayDist = 2f;
         [Range(60f, 90f)] public float minWallAngle = 75f;
         [SerializeField] protected EnergyColor _color = EnergyColor.Blue;
         [SerializeField] protected EnergyMaterial[] energyMaterials;
-        [SerializeField] protected Transform[] rayOrigins;
+        [SerializeField] protected RayOrigin[] rayOrigins;
         [SerializeField] protected GameObject energyRay;
         [SerializeField] protected GameObject sparkParticles;
         [SerializeField] protected MaterialArray particleMaterials;
@@ -39,26 +46,32 @@ namespace Equipment
                 mat.UpdateMaterial(_color);
         }
 
-        protected void OnHit(RaycastHit hit)
+        protected void OnHit(RaycastHit hit, bool useColor = false)
         {
             var material = EnergyMaterial.GetMaterial(particleMaterials, _color);
 
             // Create rays
-            foreach (Transform origin in rayOrigins)
+            foreach (RayOrigin origin in rayOrigins)
             {
-                Vector3 rayVec = hit.point - origin.position;
+                Vector3 rayVec = hit.point - origin.transform.position;
+
                 var ray = Instantiate(energyRay);
                 ray.layer = gameObject.layer;
-                ray.transform.SetPositionAndRotation(origin.position, Quaternion.LookRotation(rayVec.normalized));
+                ray.transform.SetPositionAndRotation(origin.transform.position, Quaternion.LookRotation(rayVec.normalized));
                 ray.transform.localScale = new Vector3(1f, 1f, rayVec.magnitude);
+
                 var rayComp = ray.GetComponent<EnergyRay>();
-                rayComp.start_width *= origin.localScale.x;
-                ray.GetComponent<LineRenderer>().material = material;
+                rayComp.start_width *= origin.transform.localScale.x;
+
+                if (useColor && origin.useColor)
+                    ray.GetComponent<LineRenderer>().material = material;
             }
 
             var particles = Instantiate(sparkParticles, hit.point, Quaternion.LookRotation(hit.normal));
             particles.layer = gameObject.layer;
-            particles.GetComponent<ParticleSystemRenderer>().material = material;
+
+            if (useColor)
+                particles.GetComponent<ParticleSystemRenderer>().material = material;
 
             audioSource.Play();
 
@@ -103,7 +116,7 @@ namespace Equipment
                 if (player.TakeEnergy(energyConsumption) == 0f) return;
 
                 character.moveData.desiredClimb = true;
-                OnHit(hit);
+                OnHit(hit, true);
                 return;
             }
         }

@@ -12,7 +12,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ColoredEnergy
+    second: {fileID: -1754306146357209115, guid: b9f4946f632575e40989cc8a83751e06, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Energy
+    second: {fileID: -1754306146357209115, guid: b9f4946f632575e40989cc8a83751e06, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Energy2
     second: {fileID: -1754306146357209115, guid: b9f4946f632575e40989cc8a83751e06, type: 3}
   - first:
       type: UnityEngine:Material

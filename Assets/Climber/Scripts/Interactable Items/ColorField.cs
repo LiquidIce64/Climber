@@ -1,6 +1,5 @@
 using Character;
 using UnityEngine;
-using Utils;
 using Visuals;
 
 namespace Interactables

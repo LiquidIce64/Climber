@@ -1,13 +1,15 @@
-using Interactables;
 using UnityEngine;
 
-public class BreakableObject : MonoBehaviour, IDamageable
+namespace Interactables
 {
-    [SerializeField] protected float health = 100f;
-
-    public void ApplyDamage(float damage)
+    public class BreakableObject : MonoBehaviour, IDamageable
     {
-        health -= damage;
-        if (health <= 0) Destroy(gameObject);
+        [SerializeField] protected float health = 100f;
+
+        public void ApplyDamage(float damage)
+        {
+            health -= damage;
+            if (health <= 0) Destroy(gameObject);
+        }
     }
 }

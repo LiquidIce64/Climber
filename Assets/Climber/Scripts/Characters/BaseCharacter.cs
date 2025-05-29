@@ -3,7 +3,8 @@ using Movement;
 using UnityEngine;
 
 
-namespace Character {
+namespace Character
+{
     [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
     abstract public class BaseCharacter : MonoBehaviour, IMovementControllable, IDamageable
     {

@@ -1,7 +1,6 @@
 using Character;
 using Visuals;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
 
 namespace Interactables
 {

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace Movement
 {
     public interface IMovementControllable

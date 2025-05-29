@@ -1,9 +1,9 @@
-using Movement;
 using Equipment;
 using UnityEngine;
 using Interactables;
 using Utils;
 using UnityEngine.Audio;
+using Visuals;
 
 namespace Character
 {

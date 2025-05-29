@@ -1,4 +1,3 @@
-using Movement;
 using Equipment;
 using UnityEngine;
 using UnityEngine.AI;

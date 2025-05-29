@@ -1,8 +1,8 @@
 using UnityEngine;
+using Utils;
 
 namespace Interactables
 {
-
     public class MovingObject : BaseToggleable
     {
         [SerializeField] protected Connector _reverseConnector;

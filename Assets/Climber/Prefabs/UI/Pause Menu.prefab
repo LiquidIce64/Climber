@@ -510,11 +510,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6339892252706760593}
     - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
-      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: QuitGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -618,6 +626,18 @@ PrefabInstance:
     - target: {fileID: 2710767146886564591, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1042,6 +1062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueText: {fileID: 4040751484508218059}
   mixer: {fileID: 24100000, guid: f2793ffa4a25be54291283abf4a65f86, type: 2}
+  listener: {fileID: 0}
 --- !u!1001 &7220654008001495266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1139,11 +1160,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6339892252706760593}
     - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
-      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: RestartGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1255,11 +1284,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6339892252706760593}
     - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
-      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574662485678496697, guid: 85b0c9ff7ac2dd84fbc9771cf0df97ee, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: RestartLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []

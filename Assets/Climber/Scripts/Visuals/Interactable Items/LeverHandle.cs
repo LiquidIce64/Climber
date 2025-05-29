@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class LeverHandle : ToggleAnimation
+namespace Visuals
 {
-    protected override void AnimationStep()
+    public class LeverHandle : ToggleAnimation
     {
-        float angle = Mathf.SmoothStep(-45f, 45f, _currentT);
-        transform.localRotation = Quaternion.Euler(angle, 0f, -90f);
+        protected override void AnimationStep()
+        {
+            float angle = Mathf.SmoothStep(-45f, 45f, _currentT);
+            transform.localRotation = Quaternion.Euler(angle, 0f, -90f);
+        }
     }
 }

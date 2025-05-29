@@ -3,17 +3,13 @@ using UnityEngine;
 
 namespace Interactables
 {
-    public class Button : BaseToggleable, IInteractable
+    public class Button : Lever
     {
-        [SerializeField] protected float _energyCost = 0f;
         [SerializeField] protected float timerDuration = 3f;
         protected IEnumerator _timer;
         protected bool _pressed = false;
 
-        public float EnergyCost => _energyCost;
-        public bool CanInteract => !_pressed;
-
-        public void OnInteract() => _connector.Toggle();
+        public new bool CanInteract => !_pressed;
 
         protected IEnumerator ButtonTimer()
         {
@@ -21,8 +17,20 @@ namespace Interactables
             _connector.Disable();
         }
 
+        protected override void Start()
+        {
+            base.Start();
+            if (Toggled)
+            {
+                _pressed = true;
+                _timer = ButtonTimer();
+                StartCoroutine(_timer);
+            }
+        }
+
         override protected void Enabled()
         {
+            base.Enabled();
             _pressed = true;
             if (_timer != null) StopCoroutine(_timer);
             _timer = ButtonTimer();
@@ -31,6 +39,7 @@ namespace Interactables
 
         override protected void Disabled()
         {
+            base.Disabled();
             _pressed = false;
             if (_timer != null) StopCoroutine(_timer);
             _timer = null;

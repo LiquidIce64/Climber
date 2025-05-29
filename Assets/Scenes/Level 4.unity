@@ -629,17 +629,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!114 &36518116 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7089786734092217054, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
-  m_PrefabInstance: {fileID: 632711700}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549460ce533be1a4c9d2a779ebdc0ac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &75885998 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 777227874575468601, guid: a157d6162f7230446baabce05c09f90c, type: 3}
@@ -2331,6 +2320,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 398327811225075651, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22
+      objectReference: {fileID: 0}
+    - target: {fileID: 398327811225075651, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 398327811225075651, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4206513468568649406, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
       propertyPath: _energyCost
       value: 30
@@ -2388,6 +2389,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
+--- !u!114 &632711701 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6185581407989642968, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
+  m_PrefabInstance: {fileID: 632711700}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549460ce533be1a4c9d2a779ebdc0ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &752992621
 GameObject:
   m_ObjectHideFlags: 0
@@ -5991,7 +6003,7 @@ PrefabInstance:
     - target: {fileID: 2028859558102334356, guid: ceae5f00a82bb6a4cb6756d6ecc44c4a, type: 3}
       propertyPath: _reverseConnector
       value: 
-      objectReference: {fileID: 36518116}
+      objectReference: {fileID: 632711701}
     - target: {fileID: 2606328551499681245, guid: ceae5f00a82bb6a4cb6756d6ecc44c4a, type: 3}
       propertyPath: ShapeModule.m_Scale.z
       value: -41

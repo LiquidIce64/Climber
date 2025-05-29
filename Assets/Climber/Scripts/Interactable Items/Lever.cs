@@ -8,7 +8,7 @@ namespace Interactables
     {
         [SerializeField] protected float _energyCost = 0f;
         [SerializeField] protected ToggleMaterial _indicators;
-        [SerializeField] protected LeverHandle _handle;
+        [SerializeField] protected ToggleAnimation _animation;
         [SerializeField] protected AudioClip _toggleOnSound;
         [SerializeField] protected AudioClip _toggleOffSound;
         protected AudioSource _audioSource;
@@ -27,13 +27,13 @@ namespace Interactables
         protected override void Start()
         {
             _indicators.UpdateMaterial(Toggled);
-            _handle.ForceToggle(Toggled);
+            _animation.ForceToggle(Toggled);
         }
 
         protected override void Enabled()
         {
             _indicators.UpdateMaterial(true);
-            _handle.UpdateToggle(true);
+            _animation.UpdateToggle(true);
             _audioSource.clip = _toggleOnSound;
             _audioSource.Play();
         }
@@ -41,7 +41,7 @@ namespace Interactables
         protected override void Disabled()
         {
             _indicators.UpdateMaterial(false);
-            _handle.UpdateToggle(false);
+            _animation.UpdateToggle(false);
             _audioSource.clip = _toggleOffSound;
             _audioSource.Play();
         }

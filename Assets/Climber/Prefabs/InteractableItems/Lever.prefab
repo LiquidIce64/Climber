@@ -195,7 +195,7 @@ MonoBehaviour:
   _connector: {fileID: 777227874575468601}
   _energyCost: 0
   _indicators: {fileID: 3696895536675208095}
-  _handle: {fileID: 7977245929047928198}
+  _animation: {fileID: 7977245929047928198}
   _toggleOnSound: {fileID: 8300000, guid: ed92f03b1ecc69045a3dd86904e1778e, type: 3}
   _toggleOffSound: {fileID: 8300000, guid: 62ce248560465b84ca0e874c5cc340e2, type: 3}
 --- !u!135 &8436889067040378108

@@ -14,23 +14,23 @@ namespace Interactables
         protected AudioSource _audioSource;
 
         public float EnergyCost => _energyCost;
-        public bool CanInteract => true;
+        virtual public bool CanInteract => true;
 
         public void OnInteract() => _connector.Toggle();
 
-        protected new void Awake()
+        new protected void Awake()
         {
             base.Awake();
             _audioSource = GetComponent<AudioSource>();
         }
 
-        protected override void Start()
+        override protected void Start()
         {
             _indicators.UpdateMaterial(Toggled);
             _animation.ForceToggle(Toggled);
         }
 
-        protected override void Enabled()
+        override protected void Enabled()
         {
             _indicators.UpdateMaterial(true);
             _animation.UpdateToggle(true);
@@ -38,7 +38,7 @@ namespace Interactables
             _audioSource.Play();
         }
 
-        protected override void Disabled()
+        override protected void Disabled()
         {
             _indicators.UpdateMaterial(false);
             _animation.UpdateToggle(false);

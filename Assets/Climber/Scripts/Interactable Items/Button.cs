@@ -9,7 +9,7 @@ namespace Interactables
         protected IEnumerator _timer;
         protected bool _pressed = false;
 
-        public new bool CanInteract => !_pressed;
+        override public bool CanInteract => !_pressed;
 
         protected IEnumerator ButtonTimer()
         {
@@ -17,7 +17,7 @@ namespace Interactables
             _connector.Disable();
         }
 
-        protected override void Start()
+        override protected void Start()
         {
             base.Start();
             if (Toggled)

@@ -3364,8 +3364,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7818279757069618507, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
+      propertyPath: _energyCost
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818279757069618507, guid: bacc35f53d891d34fa587eab2d137546, type: 3}
       propertyPath: timerDuration
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

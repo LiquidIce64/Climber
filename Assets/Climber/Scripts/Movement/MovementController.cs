@@ -12,6 +12,7 @@ namespace Movement
 
         public bool jumping = false;
         private float lateJumpTimer = 0f;
+        private float footstepTimer = 0f;
 
         Vector3 groundNormal = Vector3.up;
 
@@ -138,7 +139,7 @@ namespace Movement
             player.moveData.velocity.y = config.jumpVelocity;
             jumping = true;
             lateJumpTimer = config.lateJumpTime * 2;
-            player.jumpSound.Play();
+            player.jumpAudio.Play();
         }
 
         private void CalculateMovementVelocity(float deltaTime)
@@ -154,6 +155,7 @@ namespace Movement
             if (player.groundObject == null)
             {   // Air movement
                 lateJumpTimer += deltaTime;
+                footstepTimer = 1000f;
 
                 if (player.moveData.desiredJump && lateJumpTimer <= config.lateJumpTime)
                 {
@@ -189,9 +191,11 @@ namespace Movement
             else
             {   // Ground movement
                 lateJumpTimer = 0f;
+                footstepTimer += deltaTime;
 
                 if (player.moveData.desiredJump)
                 {
+                    player.footstepAudio.Play();
                     Jump();
                     return;
                 }
@@ -232,6 +236,16 @@ namespace Movement
 
                 // Set vertical velocity to follow ground slope
                 player.moveData.velocity.y = tangent * player.moveData.velocity.magnitude;
+
+                // Play footsteps
+                float vel = player.moveData.velocity.magnitude;
+                if (footstepTimer >= 1000f ||
+                    (vel >= config.footstepCutoff &&
+                    footstepTimer > 1f / (config.footstepRate * vel)))
+                {
+                    footstepTimer = 0f;
+                    player.footstepAudio.Play();
+                }
             }
         }
 

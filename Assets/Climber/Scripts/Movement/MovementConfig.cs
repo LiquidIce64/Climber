@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Movement
 {
@@ -30,6 +31,9 @@ namespace Movement
         public float deceleration = 10f;
         public float groundCheckDistance = 0.15f;
 
+        [Header("Sounds")]
+        public float footstepRate = 0.33f;
+        public float footstepCutoff = 3f;
     }
 
 }

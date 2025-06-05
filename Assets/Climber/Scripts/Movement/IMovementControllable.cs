@@ -11,7 +11,9 @@ namespace Movement
         Vector3 right { get; }
         Vector3 up { get; }
         Vector3 baseVelocity { get; }
-        AudioSource jumpSound { get; }
+        AudioSource jumpAudio { get; }
+        AudioSource footstepAudio { get; }
+
     }
 
 }

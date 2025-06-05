@@ -21,7 +21,8 @@ namespace Character
 
         [SerializeField] protected MovementConfig movementConfig;
 
-        [SerializeField] protected AudioSource _jumpSound;
+        [SerializeField] protected AudioSource _jumpAudio;
+        [SerializeField] protected AudioSource _footstepAudio;
 
         protected GameObject _groundObject;
         protected Vector3 _baseVelocity;
@@ -47,7 +48,8 @@ namespace Character
         public Vector3 forward { get { return _moveData.viewTransform.forward; } }
         public Vector3 right { get { return _moveData.viewTransform.right; } }
         public Vector3 up { get { return _moveData.viewTransform.up; } }
-        public AudioSource jumpSound => _jumpSound;
+        public AudioSource jumpAudio => _jumpAudio;
+        public AudioSource footstepAudio => _footstepAudio;
 
         public float Health { get { return health; } }
         public float MaxHealth { get { return maxHealth; } }

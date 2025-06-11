@@ -50,7 +50,7 @@ namespace Interactables
 
         protected void Update()
         {
-            if (!_connector.Toggled) return;
+            if (!Toggled) return;
 
             Vector3 vecToTarget = _target - transform.position;
             Vector3 step = _speed * Time.deltaTime * vecToTarget.normalized;
